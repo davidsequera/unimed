@@ -1,4 +1,4 @@
-package com.example.unimed;
+package com.unimed;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

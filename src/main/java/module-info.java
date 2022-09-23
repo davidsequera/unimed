@@ -1,4 +1,4 @@
-module com.example.unimed {
+module com.unimed {
     requires javafx.controls;
     requires javafx.fxml;
 
@@ -6,6 +6,6 @@ module com.example.unimed {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
 
-    opens com.example.unimed to javafx.fxml;
-    exports com.example.unimed;
+    opens com.unimed to javafx.fxml;
+    exports com.unimed;
 }

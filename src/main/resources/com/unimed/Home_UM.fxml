@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unimed.PMain_Cont">
+   <children>
+      <Polygon fill="#0000000b" layoutX="125.0" layoutY="212.0" points="225.0, 254.99996948242188, 225.00003051757812, -212.0, -123.66669464111328, 254.99996948242188" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Ellipse fill="#5400bf" layoutX="175.0" radiusX="175.0" radiusY="80.0" stroke="#5400bf" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="101.0" layoutY="89.0" prefHeight="35.0" prefWidth="148.0" text="UNIMED" textFill="#5200bdaf">
+         <font>
+            <Font name="Dubai Light" size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="108.0" layoutY="89.0" prefHeight="35.0" prefWidth="148.0" text="UNIMED" textFill="#0bc5de5c">
+         <font>
+            <Font name="Dubai Light" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="62.0" fitWidth="65.0" layoutX="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="Unimed_Logo.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="Nom" alignment="TOP_LEFT" layoutX="14.0" layoutY="143.0" prefHeight="27.0" prefWidth="179.0" text="Label">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="EPS" alignment="TOP_LEFT" layoutX="14.0" layoutY="173.0" prefHeight="17.0" prefWidth="148.0" text="Label" textFill="#00000080" />
+      <Label alignment="CENTER" layoutX="205.0" layoutY="143.0" prefHeight="17.0" prefWidth="133.0" text="Datos Principales">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="edad" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="165.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
+      <Label fx:id="altura" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="189.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
+      <Label fx:id="peso" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="211.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
+      <Button fx:id="B1" layoutX="77.0" layoutY="301.0" mnemonicParsing="false" onAction="#switchtoCrearCaso" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Crear Nuevo Caso" textFill="WHITE" />
+      <Button fx:id="B2" layoutX="77.0" layoutY="357.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Calendario" textFill="WHITE" />
+   </children>
+</AnchorPane>
