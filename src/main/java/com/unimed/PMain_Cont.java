@@ -1,4 +1,4 @@
-package com.unimed;
+package com.example.unimed;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +23,8 @@ public class PMain_Cont{
     @FXML
     private Label peso;
     @FXML
+    private Label RH;
+    @FXML
     private Button B1;
     @FXML
     private Button B2;
@@ -38,6 +40,8 @@ public class PMain_Cont{
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        B_Controller C = loader.getController();
+        C.SetObjectUsuario(U);
         stage.setScene(scene);
         stage.show();
     }
@@ -48,5 +52,6 @@ public class PMain_Cont{
         edad.setText("Edad: " + P.getEdad());
         altura.setText("Altura: " + P.getAltura());
         peso.setText("Peso: " + P.getPeso());
+        RH.setText("RH : " + P.getRH());
     }
 }

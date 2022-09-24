@@ -1,5 +1,4 @@
-package com.unimed;
-import com.unimed.Caso;
+package com.example.unimed;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,7 +40,9 @@ public class B_Controller {
     private Parent root;
 
     private Caso N_Caso; //Caso creado que se esta trabajando
-    private List<File> Agreg = new ArrayList<File>(); //Lista de archivos a agregar al caso
+
+    private Dat_Usuario U;
+    private List<File> Agreg; //Lista de archivos a agregar al caso
 
     /**
      * Metodo para abrir explorador de archivos y adquirir el path
@@ -68,12 +69,12 @@ public class B_Controller {
     public void SubirArchs(ActionEvent e){
         L3.setText("Archivos Cargados con exito!");
         N_Caso.GuardarArchivos(Agreg);
+        U.AddCase(N_Caso);
     }
     public void CrearCaso(ActionEvent e){
         String Dic_Name = T1.getText();
         String Des = T2.getText();
         Caso C1 = new Caso(Dic_Name,Des);
-        //Aqui agregar a un administrador de la clase Caso que guarde todos los casos creados
         this.N_Caso = C1;
         L2.setText("El caso se ha creado exitosamente!");
     }
@@ -83,10 +84,14 @@ public class B_Controller {
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
+        PMain_Cont C = loader.getController();
+        C.SetUsuario(U);
         stage.setScene(scene);
         stage.show();
     }
-
-
-
+    public void SetObjectUsuario(Dat_Usuario P){
+        U = P;
+        Agreg = new ArrayList(U.getCasos());
+    }
 }
+

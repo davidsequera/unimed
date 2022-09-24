@@ -1,4 +1,4 @@
-package com.unimed;
+package com.example.unimed;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class Caso {
     private boolean Activo = false; //El caso esta activo o no
     private String Path; // Path hacia donde existe el directorio
 
-    private List<String> index_names = new ArrayList<>(); // Guarda un directorio de nombres para buscar un archivo
+    private List<File> Docs = new ArrayList(); // Guarda un directorio de nombres para buscar un archivo
 
     public Caso(String Nom, String Desc){
 
@@ -31,12 +31,11 @@ public class Caso {
     private void CrearDirectorio() {
         String Path = "C:\\Users" + "\\" + "santi\\IdeaProjects\\UniMed"+ "\\" + this.Nom;
         boolean comp = new File(Path).mkdirs();
-        if(comp){
+        if(comp == true){
             this.Path = Path;
             Activo = true;
         }
     }
-
     /**
      *
      * @param arch , Lista de tipo archivo
@@ -49,13 +48,13 @@ public class Caso {
             {
                 String name_arch = arch.get(i).getName();
                 arch.get(i).renameTo(new File(this.Path + "\\" + name_arch));
-                this.index_names.add(name_arch);
+                this.Docs.add(arch.get(i));
             }
         }
         ActualizarExistencia();
     }
     private void ActualizarExistencia(){
-        int n_arch = index_names.size();
+        int n_arch = Docs.size();
         this.CantiArch = n_arch;
     }
 
