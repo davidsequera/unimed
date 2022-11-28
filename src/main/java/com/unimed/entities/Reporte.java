@@ -20,12 +20,10 @@ public class Reporte {
         java.io.File file = new java.io.File(filePath);
         try {
             FileWriter outputfile = new FileWriter(file);
-
             CSVWriter writer = new CSVWriter(outputfile,',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 
-            writer.writeNext(header);
-
             // add data to csv
+            writer.writeNext(header);
             for (String[] row : data) {
                 writer.writeNext(row);
             }

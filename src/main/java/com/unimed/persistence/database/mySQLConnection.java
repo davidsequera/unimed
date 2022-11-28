@@ -73,13 +73,13 @@
 //    }
 //
 //    @Override
-//    public List<Caso> cosultCasos(String user_id) throws Exception {
-//        ArrayList<Caso> products = new ArrayList<>();
+//    public List<Caso> cosultarCasos(String user_id) throws Exception {
+//        ArrayList<Caso> casos = new ArrayList<>();
 //        ResultSet rs= db.executeQuery("SELECT * FROM Caso WHERE user_id = " + user_id);
 //        while(rs.next()){
-////            products.add(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
+//            casos.add(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
 //        }
-//        return products;
+//        return casos;
 //    }
 //
 //    @Override
@@ -99,21 +99,21 @@
 //        }
 //    }
 //    @Override
-//    public Credentials logIn(String name) throws Exception {
-//        Credentials user;
-//        ResultSet rs= db.executeQuery("SELECT credential.user_id , credential.username, credential.password FROM credential WHERE user.username='"+name+"' LIMIT 1;");
+//    public Credenciales logIn(String username) throws Exception {
+//        Credenciales credenciales;
+//        ResultSet rs= db.executeQuery("SELECT * FROM credential WHERE username='"+username+"' LIMIT 1;");
 //        if(!rs.next()) throw new Exception("Usuario no encontrado");
-//            user = new Credentials(rs.getString(1),rs.getString(2),rs.getString(3));
-//        return user;
+//            credenciales = new Credenciales(rs.getString(1),rs.getString(2),rs.getString(3));
+//        return credenciales;
 //    }
 //    @Override
-//    public Credentials signUp(String name, String password) throws Exception {
+//    public Credenciales signUp(String name, String password) throws Exception {
 //        db.executeUpdate("INSERT INTO user (name, password) VALUES ('"+name+"','"+password+"');");
 //        connection.commit();
 //        ResultSet rs= db.executeQuery("SELECT user.id , user.name, user.password FROM user WHERE user.name='"+name+"' LIMIT 1;");
 //        if(!rs.next()) throw new Exception("Usuario no encontrado");
-//        Credentials user;
-//        user = new Credentials(rs.getString(1),rs.getString(2),rs.getString(3));
+//        Credenciales user;
+//        user = new Credenciales(rs.getString(1),rs.getString(2),rs.getString(3));
 //        return user;
 //    }
 //}

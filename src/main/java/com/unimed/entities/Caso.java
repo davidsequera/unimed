@@ -24,6 +24,16 @@ public class Caso {
         this.n_archivos = 0;
         CrearDirectorio();
     }
+    public Caso(String nombre, String descripcion, String fecha_creacion, String n_archivos, String estado, String path) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        // TODO Cast de fecha
+        this.fecha_creacion = LocalDateTime.now();
+        // String to int
+        this.n_archivos = Integer.parseInt(n_archivos);
+        this.estado = EstadoCaso.CERRADO;
+    }
+
     /**
      *
      * Este metodo es necesario para crear y activar el directorio dentro del Path seleccionado
