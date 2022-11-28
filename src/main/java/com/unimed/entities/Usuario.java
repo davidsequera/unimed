@@ -6,37 +6,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-
-    private String name;
+    private String id;
+    private String nombre;
     private String EPS;
-    private int Edad;
-    private double Altura;
-    private int Peso;
+    private int edad;
+    private double altura;
+    private int peso;
     private String RH;
     private List<Caso> Casos;
 
-    public Usuario(String name, String eps, int e, double alt, int peso, String rh){
-        this.name = name;
+    public Usuario(String nombre, String eps, int edad, double altura, int peso, String rh){
+        this.id = null;
+        this.nombre = nombre;
         this.EPS = eps;
-        this.Altura = alt;
-        this.Edad = e;
-        this.Peso = peso;
+        this.edad = edad;
+        this.altura = altura;
+        this.peso = peso;
         this.RH = rh;
         Casos = new ArrayList<Caso>();
     }
-    public Usuario(String name, String eps, int e, double alt, int peso, String rh, List<Caso> C){
-        this.name = name;
+    public Usuario(String nombre, String eps, int edad, double altura, int peso, String rh, List<Caso> C){
+        this.id = null;
+        this.nombre = nombre;
         this.EPS = eps;
-        this.Altura = alt;
-        this.Edad = e;
-        this.Peso = peso;
+        this.edad = edad;
+        this.altura = altura;
+        this.peso = peso;
         this.RH = rh;
         Casos = new ArrayList<Caso>(C);
     }
 
+    public String setId(String id) {
+        return this.id = id;
+    }
+    public String getId() {
+        return id;
+    }
 
-    public String getName() {
-        return name;
+
+
+    public String getNombre() {
+        return nombre;
     }
 
     public List<Caso> getCasos() {
@@ -44,15 +54,15 @@ public class Usuario {
     }
 
     public int getPeso() {
-        return Peso;
+        return peso;
     }
 
     public double getAltura() {
-        return Altura;
+        return altura;
     }
 
     public int getEdad() {
-        return Edad;
+        return edad;
     }
 
     public String getEPS() {

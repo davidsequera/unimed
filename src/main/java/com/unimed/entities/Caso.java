@@ -5,22 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Caso {
-
-    private String Nom; // Nombre que va a tener el caso
-    private final String Desc; //Pequeña descripcion de la informacion dentro del caso
-    private final LocalDateTime FechaI; // Fecha en la que se crea el caso
-    private int CantiArch; // Cantidad de archivos presentes en el caso
-    private boolean Activo = false; //El caso esta activo o no
+    private String id;
+    private String nombre; // Nombre que va a tener el caso
+    private final String descripcion; //Pequeña descripcion de la informacion dentro del caso
+    private final LocalDateTime fecha_creacion; // Fecha en la que se crea el caso
+    private int n_archivos; // Cantidad de archivos presentes en el caso
+    private EstadoCaso estado; //El caso esta activo o no
     private String Path; // Path hacia donde existe el directorio
 
     private List<File> Docs = new ArrayList(); // Guarda un directorio de nombres para buscar un archivo
 
-    public Caso(String Nom, String Desc){
+    public Caso(String nombre, String descripcion){
 
-        this.Nom = Nom;
-        this.Desc = Desc;
-        this.FechaI = LocalDateTime.now();
-        this.CantiArch = 0;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fecha_creacion = LocalDateTime.now();
+        this.estado = EstadoCaso.CERRADO;
+        this.n_archivos = 0;
         CrearDirectorio();
     }
     /**
@@ -29,11 +30,11 @@ public class Caso {
      * Si el Directorio ya existe este no se crea
      */
     private void CrearDirectorio() {
-        String Path = "C:\\Users" + "\\" + "santi\\IdeaProjects\\UniMed"+ "\\" + this.Nom;
+        String Path = "C:\\Users" + "\\" + "santi\\IdeaProjects\\UniMed"+ "\\" + this.nombre;
         boolean comp = new File(Path).mkdirs();
         if(comp == true){
             this.Path = Path;
-            Activo = true;
+            estado = EstadoCaso.ABIERTO;
         }
     }
     /**
@@ -55,7 +56,7 @@ public class Caso {
     }
     private void ActualizarExistencia(){
         int n_arch = Docs.size();
-        this.CantiArch = n_arch;
+        this.n_archivos = n_arch;
     }
 
 }
