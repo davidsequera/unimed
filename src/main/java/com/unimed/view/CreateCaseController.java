@@ -1,9 +1,8 @@
-package com.unimed;
+package com.unimed.view;
 
 import com.unimed.entities.Caso;
 import com.unimed.entities.Usuario;
 
-import com.unimed.view.EstadoApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -84,11 +83,11 @@ public class CreateCaseController {
     }
     public void switchtoHome(ActionEvent event) throws IOException {
         Agreg.clear();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        PMain_Cont C = loader.getController();
+        HomeController C = loader.getController();
         C.SetUsuario(EstadoApplication.getInstance().getUsuario());
         stage.setScene(scene);
         stage.show();

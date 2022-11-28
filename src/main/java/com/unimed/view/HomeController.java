@@ -1,5 +1,6 @@
-package com.unimed;
+package com.unimed.view;
 import com.unimed.entities.Usuario;
+import com.unimed.view.CreateCaseController;
 import com.unimed.view.EstadoApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class PMain_Cont{
+public class HomeController {
     @FXML
     private Label Nom;
     @FXML
@@ -38,7 +39,7 @@ public class PMain_Cont{
     private Usuario U;
 
     public void switchtoCrearCaso(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/CreateCase.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateCase.fxml"));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

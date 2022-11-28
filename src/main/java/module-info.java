@@ -11,6 +11,8 @@ module com.unimed {
     opens com.unimed to javafx.fxml;
     exports com.unimed;
     exports com.unimed.entities;
+    exports com.unimed.view;
+    opens com.unimed.view to javafx.fxml;
 //    opens com.unimed.entities to javafx.fxml;
 //    opens com.unimed.view to javafx.fxml;
 //    exports com.unimed.view;

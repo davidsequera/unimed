@@ -1,11 +1,11 @@
 package com.unimed.entities;
 
-public class Credentials {
+public class Credenciales {
     private String user_id;
     private String username;
     private String password;
 
-    public Credentials(String user_id, String username, String password) {
+    public Credenciales(String user_id, String username, String password) {
         this.user_id = user_id;
         this.username = username;
         this.password = password;

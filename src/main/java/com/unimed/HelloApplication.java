@@ -2,6 +2,7 @@ package com.unimed;
 
 import com.unimed.entities.Usuario;
 import com.unimed.view.EstadoApplication;
+import com.unimed.view.HomeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +15,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/Home.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 350, 500);
-        PMain_Cont C = fxmlLoader.getController();
+        HomeController C = fxmlLoader.getController();
         Usuario U = new Usuario("David Millan Perez","EPS Sura",21,1.91,50, "O+");
         EstadoApplication estado = EstadoApplication.getInstance();
         estado.setUsuario(U);
