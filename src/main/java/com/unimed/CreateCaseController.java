@@ -20,7 +20,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class B_Controller {
+public class CreateCaseController {
     @FXML
     private Label L1;
     @FXML

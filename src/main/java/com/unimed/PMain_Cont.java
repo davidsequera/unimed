@@ -42,7 +42,7 @@ public class PMain_Cont{
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        B_Controller C = loader.getController();
+        CreateCaseController C = loader.getController();
         C.SetObjectUsuario(EstadoApplication.getInstance().getUsuario());
         stage.setScene(scene);
         stage.show();
