@@ -1,11 +1,13 @@
-package com.example.unimed;
+package com.unimed.entities;
+
+import com.unimed.entities.Caso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dat_Usuario {
+public class Usuario {
 
-    private String Name;
+    private String name;
     private String EPS;
     private int Edad;
     private double Altura;
@@ -13,8 +15,8 @@ public class Dat_Usuario {
     private String RH;
     private List<Caso> Casos;
 
-    public Dat_Usuario(String Name, String eps, int e, double alt, int peso, String rh){
-        this.Name = Name;
+    public Usuario(String name, String eps, int e, double alt, int peso, String rh){
+        this.name = name;
         this.EPS = eps;
         this.Altura = alt;
         this.Edad = e;
@@ -22,8 +24,8 @@ public class Dat_Usuario {
         this.RH = rh;
         Casos = new ArrayList<Caso>();
     }
-    public Dat_Usuario(String Name, String eps, int e, double alt, int peso, String rh, List<Caso> C){
-        this.Name = Name;
+    public Usuario(String name, String eps, int e, double alt, int peso, String rh, List<Caso> C){
+        this.name = name;
         this.EPS = eps;
         this.Altura = alt;
         this.Edad = e;
@@ -34,7 +36,7 @@ public class Dat_Usuario {
 
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public List<Caso> getCasos() {

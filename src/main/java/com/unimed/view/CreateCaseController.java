@@ -1,4 +1,6 @@
-package com.example.unimed;
+package com.unimed.view;
+import com.unimed.entities.Caso;
+import com.unimed.entities.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +17,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class B_Controller {
+public class CreateCaseController {
     @FXML
     private Label L1;
     @FXML
@@ -41,7 +43,7 @@ public class B_Controller {
 
     private Caso N_Caso; //Caso creado que se esta trabajando
 
-    private Dat_Usuario U;
+    private Usuario U;
     private List<File> Agreg; //Lista de archivos a agregar al caso
 
     /**
@@ -80,16 +82,16 @@ public class B_Controller {
     }
     public void switchtoHome(ActionEvent event) throws IOException {
         Agreg.clear();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home_UM.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        PMain_Cont C = loader.getController();
+        HomeController C = loader.getController();
         C.SetUsuario(U);
         stage.setScene(scene);
         stage.show();
     }
-    public void SetObjectUsuario(Dat_Usuario P){
+    public void SetObjectUsuario(Usuario P){
         U = P;
         Agreg = new ArrayList(U.getCasos());
     }

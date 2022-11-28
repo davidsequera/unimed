@@ -1,4 +1,4 @@
-package com.example.unimed;
+package com.unimed.entities;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

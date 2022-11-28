@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.unimed.PMain_Cont">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unimed.view.HomeController">
    <children>
       <Polygon fill="#0000000b" layoutX="125.0" layoutY="212.0" points="225.0, 254.99996948242188, 225.00003051757812, -212.0, -123.66669464111328, 254.99996948242188" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Ellipse fill="#5400bf" layoutX="175.0" radiusX="175.0" radiusY="80.0" stroke="#5400bf" strokeType="INSIDE" />
@@ -25,7 +25,7 @@
       </Label>
       <ImageView fitHeight="62.0" fitWidth="65.0" layoutX="155.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Unimed_Logo.png" />
+            <Image url="@../image/Unimed_Logo.png" />
          </image>
       </ImageView>
       <Label fx:id="Nom" alignment="TOP_LEFT" layoutX="14.0" layoutY="143.0" prefHeight="27.0" prefWidth="179.0" text="Label">

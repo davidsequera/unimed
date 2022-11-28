@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="348.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.unimed.B_Controller">
+<AnchorPane prefHeight="517.0" prefWidth="348.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unimed.view.CreateCaseController">
    <children>
       <Polygon fill="#090909" layoutX="134.0" layoutY="184.0" opacity="0.06" points="223.0, 352.6666259765625, 223.0, -221.33334350585938, -134.0, 352.6666259765625" stroke="#706f6f" strokeType="INSIDE" />
       <Ellipse fill="#5400bf" layoutX="176.0" layoutY="-21.0" radiusX="181.0" radiusY="99.0" stroke="#4908b5fc" strokeType="INSIDE" />
@@ -35,7 +35,7 @@
       </Label>
       <ImageView fitHeight="68.0" fitWidth="67.0" layoutX="154.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Unimed_Logo.png" />
+            <Image url="@../image/Unimed_Logo.png" />
          </image>
       </ImageView>
    </children>
