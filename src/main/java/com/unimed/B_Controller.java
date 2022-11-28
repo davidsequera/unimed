@@ -1,6 +1,9 @@
-package com.unimed.view;
+package com.unimed;
+
 import com.unimed.entities.Caso;
 import com.unimed.entities.Usuario;
+
+import com.unimed.view.EstadoApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +20,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CreateCaseController {
+public class B_Controller {
     @FXML
     private Label L1;
     @FXML
@@ -76,24 +79,22 @@ public class CreateCaseController {
     public void CrearCaso(ActionEvent e){
         String Dic_Name = T1.getText();
         String Des = T2.getText();
-        Caso C1 = new Caso(Dic_Name,Des);
-        this.N_Caso = C1;
+        this.N_Caso = new Caso(Dic_Name,Des);
         L2.setText("El caso se ha creado exitosamente!");
     }
     public void switchtoHome(ActionEvent event) throws IOException {
         Agreg.clear();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/Home.fxml"));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        HomeController C = loader.getController();
-        C.SetUsuario(U);
+        PMain_Cont C = loader.getController();
+        C.SetUsuario(EstadoApplication.getInstance().getUsuario());
         stage.setScene(scene);
         stage.show();
     }
     public void SetObjectUsuario(Usuario P){
-        U = P;
-        Agreg = new ArrayList(U.getCasos());
+        Agreg = new ArrayList(P.getCasos());
     }
 }
 

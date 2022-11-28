@@ -1,18 +1,19 @@
-package com.unimed.view;
+package com.unimed;
 import com.unimed.entities.Usuario;
+import com.unimed.view.EstadoApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.net.URL;
 
 
-public class HomeController  extends Controller{
+public class PMain_Cont{
     @FXML
     private Label Nom;
     @FXML
@@ -30,30 +31,19 @@ public class HomeController  extends Controller{
     @FXML
     private Button B2;
 
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     private Usuario U;
 
-    public HomeController(Stage stage, String  path, double width, double height) {
-        super(stage, path, width,height);
-    }
-
-    public void start()  {
-        this.U = new Usuario("David Millan Perez","EPS Sura",21,1.91,50, "O+");
-        this.SetUsuario(U);
-        stage.setTitle("UniMed");
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public void switchtoCrearCaso(ActionEvent event) throws IOException {
-        URL url = getClass().getResource("CreateCase.fxml");
-        System.out.println(url);
-        FXMLLoader loader = new FXMLLoader(url);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/CreateCase.fxml"));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        CreateCaseController C = loader.getController();
-        C.SetObjectUsuario(U);
+        B_Controller C = loader.getController();
+        C.SetObjectUsuario(EstadoApplication.getInstance().getUsuario());
         stage.setScene(scene);
         stage.show();
     }

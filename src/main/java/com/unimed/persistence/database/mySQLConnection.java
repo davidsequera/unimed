@@ -6,10 +6,13 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//public class mySQLConnection implements DatabaseMapper {
+//public class mySQLConnection implements DatabaseAdapter {
 //    private static Connection connection;
 //    private static String uri = "jdbc:mysql://localhost:3306/";
 //    private static String databaseName = "silverdb";
+//    private static String databaseUser = "root";
+//    private static String databasePassword = "root";
+//
 //    private static Statement db ;
 //
 //    private static mySQLConnection instance;
@@ -30,7 +33,7 @@
 //
 //        try {
 ////            getProperties();
-//            connection=DriverManager.getConnection(uri+databaseName,"root","root");
+//            connection=DriverManager.getConnection(uri+databaseName,databaseUser,databasePassword);
 //            connection.setAutoCommit(false);
 //            connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 //            db =connection.createStatement();
@@ -70,9 +73,9 @@
 //    }
 //
 //    @Override
-//    public List<Caso> cosult() throws Exception {
+//    public List<Caso> cosultCasos(String user_id) throws Exception {
 //        ArrayList<Caso> products = new ArrayList<>();
-//        ResultSet rs= db.executeQuery("SELECT product.id, product.name, product.price, COUNT(product.id) as stock FROM product JOIN item ON product.id = item.product_id GROUP BY product.id;");
+//        ResultSet rs= db.executeQuery("SELECT * FROM Caso WHERE user_id = " + user_id);
 //        while(rs.next()){
 ////            products.add(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
 //        }
@@ -80,18 +83,15 @@
 //    }
 //
 //    @Override
-//    public Caso buy(String id) throws Exception {
-//        Caso product;
+//    public Caso CrateCase(String id, Caso c) throws Exception {
 //        try{
-//
-//        ResultSet rs= db.executeQuery("SELECT item.id, product.id , product.name, product.price FROM product JOIN item ON product.id = item.product_id WHERE product.id='"+id+"' LIMIT 1;");
-//        if(!rs.next()) throw new Exception("No hay stock");
-////        product = new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4));
-//        db.addBatch("INSERT INTO sold_item (id, product_id) VALUES ('"+product.id+"','"+product.product_id+"');");
-//        db.addBatch("DELETE FROM item WHERE id='"+product.id+"';");
-//        db.executeBatch();
+//        db.addBatch("INSERT INTO sold_item (nombre, descripcion, n_archivos, estado) VALUES ('"+c.id+"','"+c.product_id+"');");
+//        ResultSet rs= db.executeQuery("SELECT * FROM Caso WHERE user_id = " + user_id);
+//        while(rs.next()){
+//            Caso c1 =(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
+//        }
 //        connection.commit();
-//        return product;
+//        return c1;
 //        }catch (SQLException e){
 //            e.printStackTrace();
 //            connection.rollback();
@@ -99,21 +99,21 @@
 //        }
 //    }
 //    @Override
-//    public Dat_Usuario logIn(String name) throws Exception {
-//        Dat_Usuario user;
-//        ResultSet rs= db.executeQuery("SELECT user.id , user.name, user.password FROM user WHERE user.name='"+name+"' LIMIT 1;");
+//    public Credentials logIn(String name) throws Exception {
+//        Credentials user;
+//        ResultSet rs= db.executeQuery("SELECT credential.user_id , credential.username, credential.password FROM credential WHERE user.username='"+name+"' LIMIT 1;");
 //        if(!rs.next()) throw new Exception("Usuario no encontrado");
-////        user = new Dat_Usuario(rs.getString(1),rs.getString(2),rs.getString(3));
+//            user = new Credentials(rs.getString(1),rs.getString(2),rs.getString(3));
 //        return user;
 //    }
 //    @Override
-//    public Dat_Usuario signUp(String name, String password) throws Exception {
+//    public Credentials signUp(String name, String password) throws Exception {
 //        db.executeUpdate("INSERT INTO user (name, password) VALUES ('"+name+"','"+password+"');");
 //        connection.commit();
 //        ResultSet rs= db.executeQuery("SELECT user.id , user.name, user.password FROM user WHERE user.name='"+name+"' LIMIT 1;");
 //        if(!rs.next()) throw new Exception("Usuario no encontrado");
-//        Dat_Usuario user;
-////        user = new Dat_Usuario(rs.getString(1),rs.getString(2),rs.getString(3));
+//        Credentials user;
+//        user = new Credentials(rs.getString(1),rs.getString(2),rs.getString(3));
 //        return user;
 //    }
 //}
