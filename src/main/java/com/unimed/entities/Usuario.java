@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-    private String id;
-    private String nombre;
-    private String EPS;
-    private int edad;
-    private double altura;
-    private int peso;
-    private String RH;
-    private List<Caso> Casos;
+    public String id;
+    public String nombre;
+    public String EPS;
+    public int edad;
+    public double altura;
+    public int peso;
+    public String RH;
+    public List<Caso> Casos;
 
     public Usuario(String nombre, String eps, int edad, double altura, int peso, String rh){
         this.id = null;
@@ -35,43 +35,7 @@ public class Usuario {
         this.RH = rh;
         Casos = new ArrayList<Caso>(C);
     }
-
-    public String setId(String id) {
-        return this.id = id;
-    }
-    public String getId() {
-        return id;
-    }
-
-
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public List<Caso> getCasos() {
-        return Casos;
-    }
-
-    public int getPeso() {
-        return peso;
-    }
-
-    public double getAltura() {
-        return altura;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public String getEPS() {
-        return EPS;
-    }
-
-    public String getRH() {
-        return RH;
-    }
+    
     public void AddCase(Caso C){
         Casos.add(C);
     }

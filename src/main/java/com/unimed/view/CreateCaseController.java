@@ -93,7 +93,7 @@ public class CreateCaseController {
         stage.show();
     }
     public void SetObjectUsuario(Usuario P){
-        Agreg = new ArrayList(P.getCasos());
+        Agreg = new ArrayList(P.Casos);
     }
 }
 

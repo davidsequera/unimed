@@ -50,11 +50,11 @@ public class HomeController {
     }
     public void SetUsuario(Usuario P){
         U = P;
-        Nom.setText(P.getNombre());
-        EPS.setText(P.getEPS());
-        edad.setText("Edad: " + P.getEdad());
-        altura.setText("Altura: " + P.getAltura());
-        peso.setText("Peso: " + P.getPeso());
-        RH.setText("RH : " + P.getRH());
+        Nom.setText(P.nombre);
+        EPS.setText(P.EPS);
+        edad.setText("Edad: " + P.edad);
+        altura.setText("Altura: " + P.altura);
+        peso.setText("Peso: " + P.peso);
+        RH.setText("RH : " + P.RH);
     }
 }
