@@ -43,8 +43,9 @@
       <Label fx:id="altura" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="189.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
       <Label fx:id="peso" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="211.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
       <Button fx:id="CrearCasoButton" layoutX="77.0" layoutY="301.0" mnemonicParsing="false" onAction="#switchtoCrearCaso" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Crear Nuevo Caso" textFill="WHITE" />
-      <Button fx:id="verCasosButton" layoutX="77.0" layoutY="353.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Ver Casos" textFill="WHITE" />
+      <Button fx:id="verCasosButton" layoutX="77.0" layoutY="353.0" mnemonicParsing="false" onAction="#goListCasos" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Ver Casos" textFill="WHITE" />
       <Label fx:id="RH" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="234.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
       <Button fx:id="generarReporteButton" layoutX="77.0" layoutY="402.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Generar Reporte" textFill="WHITE" />
+      <Button fx:id="LogOutButton" layoutX="266.0" layoutY="464.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="59.0" style="-fx-background-color: #5400bf;" text="Log Out" textFill="WHITE" />
    </children>
 </AnchorPane>

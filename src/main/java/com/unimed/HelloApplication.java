@@ -17,11 +17,6 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("view/LogIn.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 350, 517);
         LogInController logInController = fxmlLoader.getController();
-        // Usuario mock
-        Usuario U = new Usuario("David Millan Perez","EPS Sura",21,1.91,50, "O+");
-        EstadoApplication estado = EstadoApplication.getInstance();
-        estado.setUsuario(U);
-//        homeController.SetUsuario();
         stage.setTitle("UniMed");
         stage.setScene(scene);
         stage.show();

@@ -45,6 +45,19 @@ public class LogInController{
 //        if(u != null ) {
 //            this.goIn(u);
 //        }
+        // Usuario mock
+        Usuario U = new Usuario("David Millan Perez","EPS Sura",21,1.91,50, "O+");
+        EstadoApplication estado = EstadoApplication.getInstance();
+        estado.setUsuario(U);
+        // Fin mock
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        HomeController homeController = loader.getController();
+        homeController.SetUsuario();
+        stage.setScene(scene);
+        stage.show();
     }
     @FXML
     protected void goIn(Usuario o) throws IOException {

@@ -34,6 +34,9 @@ public class HomeController {
     @FXML
     private Button generarReporteButton;
 
+    @FXML
+    private Button LogOutButton;
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -46,6 +49,17 @@ public class HomeController {
         scene = new Scene(root);
         CreateCaseController C = loader.getController();
         C.SetObjectUsuario(EstadoApplication.getInstance().getUsuario());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void goListCasos(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ListCasos.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        ListCasosController C = loader.getController();
+//        C.SetObjectUsuario(EstadoApplication.getInstance().getUsuario());
         stage.setScene(scene);
         stage.show();
     }
