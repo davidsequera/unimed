@@ -45,7 +45,6 @@ public class CreateCaseController {
 
     private Caso N_Caso; //Caso creado que se esta trabajando
 
-    private Usuario U;
     private List<File> Agreg; //Lista de archivos a agregar al caso
 
     /**
@@ -71,6 +70,7 @@ public class CreateCaseController {
        L1.setText(Report);
     }
     public void SubirArchs(ActionEvent e){
+        Usuario U = EstadoApplication.getInstance().getUsuario();
         L3.setText("Archivos Cargados con exito!");
         N_Caso.GuardarArchivos(Agreg);
         U.AddCase(N_Caso);
@@ -88,7 +88,7 @@ public class CreateCaseController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         HomeController C = loader.getController();
-        C.SetUsuario(EstadoApplication.getInstance().getUsuario());
+        C.SetUsuario();
         stage.setScene(scene);
         stage.show();
     }

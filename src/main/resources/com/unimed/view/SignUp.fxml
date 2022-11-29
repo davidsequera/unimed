@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unimed.view.SignUpController">
+   <children>
+      <Polygon fill="#0000000b" layoutX="125.0" layoutY="212.0" points="225.00006103515625, 305.0, 225.00003051757812, -212.0, -124.99998474121094, 305.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+      <Ellipse fill="#5400bf" layoutX="175.0" radiusX="175.0" radiusY="80.0" stroke="#5400bf" strokeType="INSIDE" />
+      <Label alignment="CENTER" layoutX="101.0" layoutY="89.0" prefHeight="35.0" prefWidth="148.0" text="UNIMED" textFill="#5200bdaf">
+         <font>
+            <Font name="Dubai Light" size="30.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="108.0" layoutY="89.0" prefHeight="35.0" prefWidth="148.0" text="UNIMED" textFill="#0bc5de5c">
+         <font>
+            <Font name="Dubai Light" size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="62.0" fitWidth="65.0" layoutX="155.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../image/Unimed_Logo.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="94.0" layoutY="116.0" prefHeight="56.0" prefWidth="160.0" text="Registrate" textAlignment="CENTER" textFill="#5400bf">
+         <font>
+            <Font name="Dubai Light" size="31.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="17.0" layoutY="161.0" prefHeight="347.0" prefWidth="314.0" styleClass="basicBox">
+         <children>
+            <Label layoutX="21.0" layoutY="27.0" styleClass="title" text="Nombre" textFill="#848383" />
+            <TextField fx:id="FieldNombre" layoutX="82.0" layoutY="23.0" />
+            <Label layoutX="21.0" layoutY="58.0" styleClass="title" text="EPS" textFill="#848383" />
+            <TextField fx:id="FieldEPS" layoutX="82.0" layoutY="54.0" />
+            <Label layoutX="21.0" layoutY="89.0" styleClass="title" text="Edad" textFill="#848383" />
+            <TextField fx:id="FieldEdad" layoutX="82.0" layoutY="85.0" />
+            <Label layoutX="21.0" layoutY="115.0" styleClass="title" text="Altura" textFill="#848383" />
+            <TextField fx:id="FieldAltura" layoutX="82.0" layoutY="116.0" />
+            <Label layoutX="21.0" layoutY="148.0" styleClass="title" text="Peso" textFill="#848383" />
+            <TextField fx:id="FieldPeso" layoutX="82.0" layoutY="147.0" />
+            <Label layoutX="21.0" layoutY="181.0" styleClass="title" text="RH" textFill="#848383" />
+            <TextField fx:id="FieldRH" layoutX="82.0" layoutY="178.0" />
+            <Label layoutX="21.0" layoutY="213.0" prefWidth="62.0" styleClass="title" text="Username" textFill="#848383" />
+            <TextField fx:id="FieldUsername" layoutX="82.0" layoutY="209.0" />
+            <Label layoutX="21.0" layoutY="244.0" prefWidth="62.0" styleClass="title" text="Contraseña" textFill="#848383" />
+            <PasswordField fx:id="FieldPasswird" layoutX="82.0" layoutY="240.0" />
+            <Button fx:id="signUpButton" layoutX="86.0" layoutY="279.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="142.0" style="-fx-background-color: #5400bf;" text="Registrate" textFill="WHITE" />
+            <Button fx:id="logInButton" layoutX="86.0" layoutY="314.0" mnemonicParsing="false" onAction="#goLogIn" prefHeight="18.0" prefWidth="142.0" style="-fx-background-color: #5400bf;" text="Volver a Log In" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

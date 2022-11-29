@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class HomeController {
     @FXML
-    private Label Nom;
+    private Label nombre;
     @FXML
     private Label EPS;
     @FXML
@@ -28,18 +28,19 @@ public class HomeController {
     @FXML
     private Label RH;
     @FXML
-    private Button B1;
+    private Button CrearCasoButton;
     @FXML
-    private Button B2;
+    private Button verCasosButton;
+    @FXML
+    private Button generarReporteButton;
 
     private Stage stage;
     private Scene scene;
     private Parent root;
 
-    private Usuario U;
 
     public void switchtoCrearCaso(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateCase.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CrearCaso.fxml"));
         root = loader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -48,13 +49,13 @@ public class HomeController {
         stage.setScene(scene);
         stage.show();
     }
-    public void SetUsuario(Usuario P){
-        U = P;
-        Nom.setText(P.nombre);
-        EPS.setText(P.EPS);
-        edad.setText("Edad: " + P.edad);
-        altura.setText("Altura: " + P.altura);
-        peso.setText("Peso: " + P.peso);
-        RH.setText("RH : " + P.RH);
+    public void SetUsuario(){
+        Usuario U = EstadoApplication.getInstance().getUsuario();
+        nombre.setText(U.nombre);
+        EPS.setText(U.EPS);
+        edad.setText("Edad: " + U.edad);
+        altura.setText("Altura: " + U.altura);
+        peso.setText("Peso: " + U.peso);
+        RH.setText("RH : " + U.RH);
     }
 }
