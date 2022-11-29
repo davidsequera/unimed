@@ -63,6 +63,15 @@ public class HomeController {
         stage.setScene(scene);
         stage.show();
     }
+    public void LogOut(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogIn.fxml"));
+        root = loader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        LogInController logInController = loader.getController();
+        stage.setScene(scene);
+        stage.show();
+    }
     public void SetUsuario(){
         Usuario U = EstadoApplication.getInstance().getUsuario();
         nombre.setText(U.nombre);
