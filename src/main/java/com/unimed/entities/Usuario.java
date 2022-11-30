@@ -8,35 +8,37 @@ import java.util.List;
 public class Usuario {
     public String id;
     public String nombre;
-    public String EPS;
     public int edad;
     public double altura;
     public int peso;
     public String RH;
-    public List<Caso> Casos;
+    public String eps_id;
+    public List<Caso> casos;
 
-    public Usuario(String nombre, String eps, int edad, double altura, int peso, String rh){
-        this.id = null;
+    public Usuario(String nombre, int edad, double altura, int peso, String RH, String eps_id){
         this.nombre = nombre;
-        this.EPS = eps;
         this.edad = edad;
         this.altura = altura;
         this.peso = peso;
-        this.RH = rh;
-        Casos = new ArrayList<Caso>();
+        this.RH = RH;
+        this.eps_id = eps_id;
+        this.casos = new ArrayList<>();
     }
-    public Usuario(String nombre, String eps, int edad, double altura, int peso, String rh, List<Caso> C){
-        this.id = null;
+    // Database constructor
+    public Usuario(String id, String nombre, String edad, String altura,String peso, String RH, String eps_id){
+        this.id = id;
         this.nombre = nombre;
-        this.EPS = eps;
-        this.edad = edad;
-        this.altura = altura;
-        this.peso = peso;
-        this.RH = rh;
-        Casos = new ArrayList<Caso>(C);
+        this.edad = Integer.parseInt(edad);
+        this.altura = Double.parseDouble(altura);
+        this.peso = Integer.parseInt(peso);
+        this.RH = RH;
+        this.eps_id = eps_id;
+        this.casos = new ArrayList<>();
     }
-    
-    public void AddCase(Caso C){
-        Casos.add(C);
+    public void setCasos(List<Caso> casos) {
+        this.casos = casos;
+    }
+    public void addCaso(Caso C){
+        casos.add(C);
     }
 }

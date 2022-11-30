@@ -1,5 +1,9 @@
 package com.unimed.entities;
 
 public enum EstadoCaso {
-    ABIERTO, CERRADO, CANCELADO
+    INICIADO("INICIADO"), ABIERTO("ABIERTO"),CERRADO("CERRADO"), CANCELADO("CANCELADO");
+    final String estado;
+    EstadoCaso(String estado) {
+        this.estado = estado;
+    }
 }

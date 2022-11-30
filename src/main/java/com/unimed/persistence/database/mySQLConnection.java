@@ -1,17 +1,23 @@
 package com.unimed.persistence.database;
 
 import com.unimed.entities.*;
+import javafx.util.Pair;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class mySQLConnection implements DatabaseAdapter {
     private static Connection connection;
-    private static String uri = "jdbc:mysql://localhost:3306/";
-    private static String databaseName = "unimed";
-    private static String databaseUser = "root";
-    private static String databasePassword = "root";
+    private static String uri ;
+    private static String databaseName;
+    private static String databaseUser;
+    private static String databasePassword ;
+    private static String properties_path = "src/main/resources/config.properties";
 
     private static Statement db ;
 
@@ -30,40 +36,36 @@ public class mySQLConnection implements DatabaseAdapter {
 
     @Override
     public void connect(){
-
         try {
-//            getProperties();
-            connection=DriverManager.getConnection(uri+databaseName,databaseUser,databasePassword);
+            getProperties();
+            connection=DriverManager.getConnection(uri+'/'+databaseName,databaseUser,databasePassword);
             connection.setAutoCommit(false);
             connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
             db =connection.createStatement();
         } catch ( Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
-    public void getProperties() throws Exception {
-//        try (InputStream input = new FileInputStream("path/to/config.properties")) {
-//
-//            Properties prop = new Properties();
-//
-//            // load a properties file
-//            prop.load(input);
-//
-//            // get the property value and print it out
-//            System.out.println(prop.getProperty("db.uri"));
-//            System.out.println(prop.getProperty("db.user"));
-//            System.out.println(prop.getProperty("db.password"));
-//
-//        } catch (IOException ex) {
-//            ex.printStackTrace();
-//        }
+    public void getProperties()  {
+        try (InputStream input = new FileInputStream(properties_path)) {
+
+            Properties prop = new Properties();
+
+            // load a properties file
+            prop.load(input);
+
+            uri = prop.getProperty("db.uri") ;
+            databaseName = prop.getProperty("db.name");
+            databaseUser = prop.getProperty("db.user");
+            databasePassword = prop.getProperty("db.password") ;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
     }
-
-
+    @Override
     public void disconnect() {
         try {
             connection.close();
@@ -73,55 +75,67 @@ public class mySQLConnection implements DatabaseAdapter {
     }
 
     @Override
-    public List<Caso> cosultarCasos(String user_id) throws Exception {
+    public List<Caso> consultarCasos(String user_id) throws Exception {
         ArrayList<Caso> casos = new ArrayList<>();
-        ResultSet rs= db.executeQuery("SELECT * FROM Caso WHERE user_id = " + user_id);
+        ResultSet rs= db.executeQuery("SELECT * FROM Caso WHERE user_id = '" + user_id+ "'");
         while(rs.next()){
-            casos.add(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7) ));
+            casos.add(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6),rs.getString(7),rs.getString(8), rs.getString(9)   ));
         }
         return casos;
     }
 
     @Override
-    public Caso crearCaso(String id, Caso c) throws Exception {
+    public Caso crearCaso(Caso c) throws Exception {
         try{
             Caso casodb = null;
-            db.addBatch("INSERT INTO sold_item (id,user_id,nombre, descripcion, n_archivos, estado) VALUES ('"+c.user_id+"','"+c.nombre+"','"+c.descripcion+"','"+c.n_archivos+"','"+c.nombre+"','"+c.descripcion+"','"+c.nombre+"','"+c.descripcion+"');");
-            ResultSet rs= db.executeQuery("SELECT * FROM Caso WHERE user_id = " + id);
+            db.executeUpdate("INSERT INTO caso (nombre,descripcion,fecha_creacion,n_archivos,estado,user_id,eps_id, path) VALUES ('"+c.nombre+"','"+c.descripcion+"','"+c.fecha_creacion+"','"+c.n_archivos+"','"+c.estado+"','"+c.user_id+"','"+c.eps_id+"','"+c.path+"');");
+            ResultSet rs= db.executeQuery("SELECT * FROM caso WHERE user_id = '" + c.user_id+ "' AND eps_id= '" + c.eps_id+ "' AND fecha_creacion= '"+c.fecha_creacion+"' LIMIT 1;");
             while(rs.next()){
-                casodb =(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                casodb =(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
             }
             connection.commit();
             return casodb;
         }catch (SQLException e){
             e.printStackTrace();
             connection.rollback();
-            throw new Exception("Error al comprar");
+            throw new Exception("Error al crear el caso");
         }
     }
 
     @Override
     public Usuario consultarUsuario(String user_id) throws Exception {
-        return null;
+        Usuario usuario;
+        ResultSet rs= db.executeQuery("SELECT * FROM usuario WHERE id='"+user_id+"' LIMIT 1;");
+        if(!rs.next()) throw new Exception("Usuario no encontrado");
+        usuario = new Usuario(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+        return usuario;
     }
 
     @Override
-    public Credenciales logIn(String username) throws Exception {
+    public Credenciales getCredenciales(String user_id) throws Exception {
         Credenciales credenciales;
-        ResultSet rs= db.executeQuery("SELECT * FROM credential WHERE username='"+username+"' LIMIT 1;");
-        if(!rs.next()) throw new Exception("Usuario no encontrado");
-            credenciales = new Credenciales(rs.getString(1),rs.getString(2),rs.getString(3));
+        ResultSet rs= db.executeQuery("SELECT id,username,password,user_id FROM credenciales WHERE user_id='"+user_id+"' LIMIT 1;");
+        if(!rs.next()) throw new Exception("Credenciales no encontradas");
+            credenciales = new Credenciales(rs.getString(1),rs.getString(2),rs.getString(3), rs.getString(4));
         return credenciales;
     }
     @Override
-    public Credenciales signUp(Credenciales credenciales, Usuario usuario) throws Exception {
-        db.executeUpdate("INSERT INTO credenciales (user_id, username, password) VALUES ('"+credenciales.getUser()+"','"+credenciales.getPassword()+"');");
-        db.executeUpdate("INSERT INTO user (nombre,EPS,edad,altura,peso,RH)  VALUES ('"+usuario.nombre+"','"+usuario.EPS+"','"+usuario.edad+"','"+usuario.altura+"','"+usuario.altura+"');");
-        connection.commit();
-        ResultSet rs= db.executeQuery("SELECT id,nombre,EPS,edad,altura,peso,RH FROM usuario WHERE id='"+usuario.id+"' LIMIT 1;");
+    public Credenciales getCredencialesByUsername(String username) throws Exception {
+        Credenciales credenciales;
+        ResultSet rs= db.executeQuery("SELECT id,username,password,user_id FROM credenciales WHERE username='"+username+"' LIMIT 1;");
+        if(!rs.next()) throw new Exception("Credenciales no encontradas");
+        credenciales = new Credenciales(rs.getString(1),rs.getString(2),rs.getString(3), rs.getString(4));
+        return credenciales;
+    }
+    @Override
+    public Pair<Credenciales, Usuario> crearUsuario(Credenciales credenciales, Usuario usuario) throws Exception {
+        Usuario usuario_db;
+        db.executeUpdate("INSERT INTO usuario (nombre,edad,altura,peso,RH, eps_id)  VALUES ('"+usuario.nombre+"','"+usuario.edad+"','"+usuario.altura+"','"+usuario.peso+"','"+usuario.RH+"','"+usuario.eps_id+"');");
+        ResultSet rs= db.executeQuery("SELECT id,nombre,edad,altura,peso,RH, eps_id  FROM usuario WHERE nombre='"+usuario.nombre+"' AND edad='"+usuario.edad+"' LIMIT 1;");
         if(!rs.next()) throw new Exception("Usuario no encontrado");
-        Credenciales user;
-        user = new Credenciales(rs.getString(1),rs.getString(2),rs.getString(3));
-        return user;
+        usuario_db = new Usuario(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+        db.executeUpdate("INSERT INTO credenciales (user_id, username, password) VALUES ('"+usuario_db.id+"','"+credenciales.getUsername()+"','"+credenciales.getPassword()+"');");
+        connection.commit();
+        return new Pair<>(getCredenciales(usuario_db.id), usuario_db);
     }
 }

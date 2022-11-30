@@ -6,33 +6,39 @@ import java.util.Date;
 import java.util.List;
 
 public class Caso {
+
     public String id;
-    public String user_id;
     public String nombre; // Nombre que va a tener el caso
     public final String descripcion; //Pequeña descripcion de la informacion dentro del caso
     public final long fecha_creacion; // Fecha en la que se crea el caso
-    public int n_archivos; // Cantidad de archivos presentes en el caso
     public EstadoCaso estado; //El caso esta activo o no
-    public String Path; // Path hacia donde existe el directorio
+    public int n_archivos; // Cantidad de archivos presentes en el caso
+    public String user_id;
+    public String eps_id;
+    public String path; // Path hacia donde existe el directorio
+    public List<File> docs = new ArrayList<>(); // Guarda un directorio de nombres para buscar un archivo
 
-    public List<File> Docs = new ArrayList(); // Guarda un directorio de nombres para buscar un archivo
-
-    public Caso(String nombre, String descripcion){
-
+    public Caso(String nombre, String descripcion, int n_archivos, String user_id, String eps_id) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha_creacion = System.nanoTime();
-        this.estado = EstadoCaso.CERRADO;
-        this.n_archivos = 0;
-        CrearDirectorio();
-    }
-    public Caso(String user_id,String nombre, String descripcion, String fecha_creacion, String n_archivos, String estado, String path) {
         this.user_id = user_id;
+        this.eps_id = eps_id ;
+        this.estado = EstadoCaso.INICIADO;
+        this.n_archivos = n_archivos;
+    }
+    // DB instance
+    public Caso(String id,String nombre, String descripcion, String fecha_creacion, String n_archivos, String estado, String user_id, String eps_id, String path){
+        this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha_creacion = Long.parseLong(fecha_creacion);
         this.n_archivos = Integer.parseInt(n_archivos);
-        this.estado = EstadoCaso.CERRADO;
+        this.estado = EstadoCaso.valueOf(estado);
+        this.eps_id = eps_id;
+        this.user_id = user_id;
+        this.nombre = nombre;
+        this.path = path;
     }
 
     /**
@@ -40,12 +46,14 @@ public class Caso {
      * Este metodo es necesario para crear y activar el directorio dentro del Path seleccionado
      * Si el Directorio ya existe este no se crea
      */
-    private void CrearDirectorio() {
-        String Path = "C:\\Users" + "\\" + "santi\\IdeaProjects\\UniMed"+ "\\" + this.nombre;
-        boolean comp = new File(Path).mkdirs();
-        if(comp == true){
-            this.Path = Path;
-            estado = EstadoCaso.ABIERTO;
+    public void CrearCarpeta() {
+        if(this.user_id != null && this.eps_id != null){
+            String path = "src/resources/Casos/"+this.user_id+'/'+ this.nombre;
+            boolean comp = new File(path).mkdirs();
+            if(comp){
+                this.path = path;
+                estado = EstadoCaso.ABIERTO;
+            }
         }
     }
     /**
@@ -59,17 +67,31 @@ public class Caso {
             for(int i = 0;i < arch.size();i++)
             {
                 String name_arch = arch.get(i).getName();
-                arch.get(i).renameTo(new File(this.Path + "\\" + name_arch));
-                this.Docs.add(arch.get(i));
+                arch.get(i).renameTo(new File(this.path + "\\" + name_arch));
+                this.docs.add(arch.get(i));
             }
         }
         ActualizarExistencia();
     }
     private void ActualizarExistencia(){
-        int n_arch = Docs.size();
-        this.n_archivos = n_arch;
+        this.n_archivos = docs.size();
     }
 
+    @Override
+    public String toString() {
+        return "Caso{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", fecha_creacion=" + fecha_creacion +
+                ", estado=" + estado +
+                ", n_archivos=" + n_archivos +
+                ", user_id='" + user_id + '\'' +
+                ", eps_id='" + eps_id + '\'' +
+                ", path='" + path + '\'' +
+                ", docs=" + docs +
+                '}';
+    }
 }
 
 

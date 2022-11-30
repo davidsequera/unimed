@@ -31,13 +31,10 @@ public class LogInController{
 
     @FXML
     void goSignUp(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignUp.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        ApplicationState appState = ApplicationState.getInstance();
+        FXMLLoader loader = appState.setPage("SignUp");
         SignUpController signUpController = loader.getController();
-        stage.setScene(scene);
-        stage.show();
+        appState.goPage();
     }
     @FXML
     void LogIn(ActionEvent event) throws IOException {
@@ -46,31 +43,16 @@ public class LogInController{
 //            this.goIn(u);
 //        }
         // Usuario mock
-        Usuario U = new Usuario("David Millan Perez","EPS Sura",21,1.91,50, "O+");
-        EstadoApplication estado = EstadoApplication.getInstance();
-        estado.setUsuario(U);
-        // Fin mock
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Home.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
+        Usuario U = new Usuario("David Millan Perez",20,1.91,60,"O+", "63865b81163842e07000002e");
+        ApplicationState appState = ApplicationState.getInstance();
+        appState.setUsuario(U);
+
+        FXMLLoader loader = appState.setPage("Home");
         HomeController homeController = loader.getController();
         homeController.SetUsuario();
-        stage.setScene(scene);
-        stage.show();
+        appState.goPage();
+
     }
-    @FXML
-    protected void goIn(Usuario o) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("list.fxml"));
-        Parent root = loader.load();
-//        ListController listController = loader.getController();
-//        listController.setUser(o);
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        stage.setScene(scene);
-        stage.show();
-        Stage myStage = (Stage) this.SignUpButton.getScene().getWindow();
-        myStage.close();
-    }
+
 
 }

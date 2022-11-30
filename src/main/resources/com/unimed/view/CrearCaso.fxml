@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unimed.view.CreateCaseController">
+<AnchorPane prefHeight="517.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unimed.view.CrearCasoController">
    <children>
       <Polygon fill="#090909" layoutX="134.0" layoutY="184.0" opacity="0.06" points="223.0, 352.6666259765625, 223.0, -221.33334350585938, -134.0, 352.6666259765625" stroke="#706f6f" strokeType="INSIDE" />
       <Ellipse fill="#5400bf" layoutX="176.0" layoutY="-21.0" radiusX="181.0" radiusY="99.0" stroke="#4908b5fc" strokeType="INSIDE" />
@@ -26,7 +26,7 @@
       <Label fx:id="L2" layoutX="132.0" layoutY="296.0" prefHeight="17.0" prefWidth="201.0" />
       <Button fx:id="B2" layoutX="46.0" layoutY="292.0" mnemonicParsing="false" onAction="#CrearCaso" style="-fx-background-color: #5400bf;" text="Crear Caso" textFill="WHITE" />
       <Button fx:id="B3" layoutX="46.0" layoutY="412.0" mnemonicParsing="false" onAction="#SubirArchs" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Cargar" textFill="WHITE" />
-      <Button fx:id="B4" layoutX="135.0" layoutY="484.0" mnemonicParsing="false" onAction="#switchtoHome" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Volver" textFill="WHITE" />
+      <Button fx:id="B4" layoutX="135.0" layoutY="484.0" mnemonicParsing="false" onAction="#goHome" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Volver" textFill="WHITE" />
       <Label fx:id="L3" layoutX="151.0" layoutY="416.0" prefHeight="17.0" prefWidth="185.0" />
       <Label alignment="TOP_CENTER" layoutX="46.0" layoutY="90.0" prefHeight="17.0" prefWidth="260.0" text="Nuevo Caso">
          <font>

@@ -1,7 +1,5 @@
 package com.unimed.view;
 import com.unimed.entities.Usuario;
-import com.unimed.view.CreateCaseController;
-import com.unimed.view.EstadoApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,40 +40,32 @@ public class HomeController {
     private Parent root;
 
 
-    public void switchtoCrearCaso(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CrearCaso.fxml"));
-        root = loader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        CreateCaseController C = loader.getController();
-        C.SetObjectUsuario(EstadoApplication.getInstance().getUsuario());
-        stage.setScene(scene);
-        stage.show();
+    public void goCrearCaso(ActionEvent event) throws IOException {
+        ApplicationState appState = ApplicationState.getInstance();
+        FXMLLoader loader = appState.setPage("CrearCaso");
+        CrearCasoController crearCasoController = loader.getController();
+        crearCasoController.SetObjectUsuario(appState.getUsuario());
+        appState.goPage();
     }
 
     public void goListCasos(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ListCasos.fxml"));
-        root = loader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        ListCasosController C = loader.getController();
-//        C.SetObjectUsuario(EstadoApplication.getInstance().getUsuario());
-        stage.setScene(scene);
-        stage.show();
+        ApplicationState appState = ApplicationState.getInstance();
+        FXMLLoader loader = appState.setPage("ListCasos");
+        ListCasosController listCasoController = loader.getController();
+//        listCasoController.SetObjectUsuario(EstadoApplication.getInstance().getUsuario());
+        appState.goPage();
     }
     public void LogOut(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LogIn.fxml"));
-        root = loader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        ApplicationState appState = ApplicationState.getInstance();
+        FXMLLoader loader = appState.setPage("LogIn");
         LogInController logInController = loader.getController();
-        stage.setScene(scene);
-        stage.show();
+        appState.LogOut();
+        appState.goPage();
     }
     public void SetUsuario(){
-        Usuario U = EstadoApplication.getInstance().getUsuario();
+        Usuario U = ApplicationState.getInstance().getUsuario();
         nombre.setText(U.nombre);
-        EPS.setText(U.EPS);
+        EPS.setText(U.eps_id);
         edad.setText("Edad: " + U.edad);
         altura.setText("Altura: " + U.altura);
         peso.setText("Peso: " + U.peso);
