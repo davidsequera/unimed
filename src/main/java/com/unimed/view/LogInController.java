@@ -1,16 +1,16 @@
 package com.unimed.view;
 
+import com.unimed.entities.Credenciales;
 import com.unimed.entities.Usuario;
+import com.unimed.persistence.OperationFunction.LogIn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.IOException;
 
@@ -37,20 +37,30 @@ public class LogInController{
         appState.goPage();
     }
     @FXML
-    void LogIn(ActionEvent event) throws IOException {
-//        Owner u = auth.logIn(TextUsuario.getText(),TextPassword.getText());
-//        if(u != null ) {
-//            this.goIn(u);
-//        }
-        // Usuario mock
-        Usuario U = new Usuario("David Millan Perez",20,1.91,60,"O+", "63865b81163842e07000002e");
-        ApplicationState appState = ApplicationState.getInstance();
-        appState.setUsuario(U);
+    void LogIn(ActionEvent event)  {
+        try {
+            Credenciales credenciales = new Credenciales(FieldUsername.getText(), FieldPassword.getText());
 
-        FXMLLoader loader = appState.setPage("Home");
-        HomeController homeController = loader.getController();
-        homeController.SetUsuario();
-        appState.goPage();
+
+            // Crear usuario
+            LogIn  logIn = new LogIn();
+            Pair<Credenciales, Usuario> result = logIn.act(credenciales);
+
+            if(result.getValue() == null || result.getKey() == null){
+                throw new Exception("Error al iniciar sesion usuario");
+                //TODO mostrar mensaje de error
+            }else{
+                ApplicationState appState = ApplicationState.getInstance();
+                appState.setUsuario(result.getValue());
+                FXMLLoader loader = appState.setPage("Home");
+                HomeController homeController = loader.getController();
+                homeController.SetUsuario();
+                appState.goPage();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

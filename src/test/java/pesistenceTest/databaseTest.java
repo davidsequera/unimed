@@ -7,22 +7,18 @@ import com.unimed.persistence.database.DatabaseAdapter;
 import com.unimed.persistence.database.mySQLConnection;
 import javafx.util.Pair;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class databaseTest {
 
     DatabaseAdapter database = mySQLConnection.getInstance();
 
-    private static String user_id = "638761f5163842e0700001b3";
-    private static String eps_id = "63865b81163842e07000002e";
-    private static String username = "test@gmail.com";
+    private static final String user_id = "638761f5163842e0700001b3";
+    private static final String eps_id = "63865b81163842e07000002e";
+    private static final String username = "test@gmail.com";
 
     @Test
     void testCrearCaso() throws Exception {
@@ -40,7 +36,7 @@ public class databaseTest {
     void testConsultarUsuario()  {
         try {
             Usuario u = database.consultarUsuario(user_id);
-            Assertions.assertEquals(u.id, user_id);
+            Assertions.assertEquals(user_id, u.id);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,8 +54,8 @@ public class databaseTest {
     @Test
     void testGetCredencialesByUsername()  {
         try {
-            Credenciales credenciales = database.getCredencialesByUsername(username);
-            Assertions.assertEquals(username,credenciales.getUsername() );
+            Credenciales credenciales = database.getCredencialesByUsername("david@gmail.com");
+            Assertions.assertEquals("david@gmail.com",credenciales.getUsername() );
         } catch (Exception e) {
             e.printStackTrace();
         }

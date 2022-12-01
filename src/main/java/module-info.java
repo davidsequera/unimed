@@ -7,7 +7,7 @@ module com.unimed {
     requires org.kordamp.bootstrapfx.core;
     requires com.opencsv;
     requires java.sql;
-//    requires bcrypt;
+    requires spring.security.crypto;
 
     opens com.unimed to javafx.fxml;
     exports com.unimed;

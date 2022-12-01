@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unimed.view.SignUpController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.unimed.view.SignUpController">
    <children>
       <Polygon fill="#0000000b" layoutX="125.0" layoutY="212.0" points="225.00006103515625, 305.0, 225.00003051757812, -212.0, -124.99998474121094, 305.0" stroke="TRANSPARENT" strokeType="INSIDE" />
       <Ellipse fill="#5400bf" layoutX="175.0" radiusX="175.0" radiusY="80.0" stroke="#5400bf" strokeType="INSIDE" />
@@ -39,21 +39,21 @@
          <children>
             <Label layoutX="21.0" layoutY="27.0" styleClass="title" text="Nombre" textFill="#848383" />
             <TextField fx:id="FieldNombre" layoutX="82.0" layoutY="23.0" />
-            <Label layoutX="21.0" layoutY="58.0" styleClass="title" text="EPS" textFill="#848383" />
-            <TextField fx:id="FieldEPS" layoutX="82.0" layoutY="54.0" />
+            <Label layoutX="21.0" layoutY="58.0" styleClass="title" text="RH" textFill="#848383" />
+            <TextField fx:id="FieldRH" layoutX="82.0" layoutY="54.0" />
             <Label layoutX="21.0" layoutY="89.0" styleClass="title" text="Edad" textFill="#848383" />
             <TextField fx:id="FieldEdad" layoutX="82.0" layoutY="85.0" />
             <Label layoutX="21.0" layoutY="115.0" styleClass="title" text="Altura" textFill="#848383" />
             <TextField fx:id="FieldAltura" layoutX="82.0" layoutY="116.0" />
             <Label layoutX="21.0" layoutY="148.0" styleClass="title" text="Peso" textFill="#848383" />
             <TextField fx:id="FieldPeso" layoutX="82.0" layoutY="147.0" />
-            <Label layoutX="21.0" layoutY="181.0" styleClass="title" text="RH" textFill="#848383" />
-            <TextField fx:id="FieldRH" layoutX="82.0" layoutY="178.0" />
+            <Label layoutX="19.0" layoutY="182.0" styleClass="title" text="EPS" textFill="#848383" />
+            <TextField fx:id="FieldEPS" layoutX="82.0" layoutY="178.0" />
             <Label layoutX="21.0" layoutY="213.0" prefWidth="62.0" styleClass="title" text="Username" textFill="#848383" />
             <TextField fx:id="FieldUsername" layoutX="82.0" layoutY="209.0" />
             <Label layoutX="21.0" layoutY="244.0" prefWidth="62.0" styleClass="title" text="Contraseña" textFill="#848383" />
-            <PasswordField fx:id="FieldPasswird" layoutX="82.0" layoutY="240.0" />
-            <Button fx:id="signUpButton" layoutX="86.0" layoutY="279.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="142.0" style="-fx-background-color: #5400bf;" text="Registrate" textFill="WHITE" />
+            <PasswordField fx:id="FieldPassword" layoutX="82.0" layoutY="240.0" />
+            <Button fx:id="signUpButton" layoutX="86.0" layoutY="279.0" mnemonicParsing="false" onAction="#signUp" prefHeight="0.0" prefWidth="142.0" style="-fx-background-color: #5400bf;" text="Registrate" textFill="WHITE" />
             <Button fx:id="logInButton" layoutX="86.0" layoutY="314.0" mnemonicParsing="false" onAction="#goLogIn" prefHeight="18.0" prefWidth="142.0" style="-fx-background-color: #5400bf;" text="Volver a Log In" textFill="WHITE" />
          </children>
       </AnchorPane>

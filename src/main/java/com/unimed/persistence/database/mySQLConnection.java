@@ -17,7 +17,7 @@ public class mySQLConnection implements DatabaseAdapter {
     private static String databaseName;
     private static String databaseUser;
     private static String databasePassword ;
-    private static String properties_path = "src/main/resources/config.properties";
+    private static final String properties_path = "src/main/resources/config.properties";
 
     private static Statement db ;
 
@@ -103,6 +103,16 @@ public class mySQLConnection implements DatabaseAdapter {
     }
 
     @Override
+    public List<Eps> getEPS() throws Exception {
+        ArrayList<Eps> eps = new ArrayList<>();
+        ResultSet rs= db.executeQuery("SELECT * FROM eps");
+        while(rs.next()){
+            eps.add(new Eps(rs.getString(1),rs.getString(2)   ));
+        }
+        return eps;
+    }
+
+    @Override
     public Usuario consultarUsuario(String user_id) throws Exception {
         Usuario usuario;
         ResultSet rs= db.executeQuery("SELECT * FROM usuario WHERE id='"+user_id+"' LIMIT 1;");
@@ -116,7 +126,7 @@ public class mySQLConnection implements DatabaseAdapter {
         Credenciales credenciales;
         ResultSet rs= db.executeQuery("SELECT id,username,password,user_id FROM credenciales WHERE user_id='"+user_id+"' LIMIT 1;");
         if(!rs.next()) throw new Exception("Credenciales no encontradas");
-            credenciales = new Credenciales(rs.getString(1),rs.getString(2),rs.getString(3), rs.getString(4));
+        credenciales = new Credenciales(rs.getString(1),rs.getString(2),rs.getString(3), rs.getString(4));
         return credenciales;
     }
     @Override

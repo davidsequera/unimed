@@ -14,7 +14,7 @@ public interface DatabaseAdapter {
     // Peticiones
     List<Caso> consultarCasos(String user_id) throws Exception;
     Caso crearCaso(Caso c) throws Exception;
-
+    List<Eps> getEPS() throws Exception;
     Usuario consultarUsuario(String user_id) throws Exception;
     Credenciales getCredenciales(String username)  throws Exception;
     Credenciales getCredencialesByUsername(String username) throws Exception;

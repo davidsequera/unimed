@@ -3,12 +3,8 @@ import com.unimed.entities.Usuario;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import java.io.IOException;
 
 
@@ -35,9 +31,6 @@ public class HomeController {
     @FXML
     private Button LogOutButton;
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
 
 
     public void goCrearCaso(ActionEvent event) throws IOException {
@@ -67,8 +60,8 @@ public class HomeController {
         nombre.setText(U.nombre);
         EPS.setText(U.eps_id);
         edad.setText("Edad: " + U.edad);
-        altura.setText("Altura: " + U.altura);
-        peso.setText("Peso: " + U.peso);
+        altura.setText("Altura: " + U.altura+"cm");
+        peso.setText("Peso: " + U.peso+"kg");
         RH.setText("RH : " + U.RH);
     }
 }

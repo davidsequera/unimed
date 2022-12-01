@@ -1,28 +1,24 @@
 package com.unimed.view;
 
-import com.unimed.entities.Caso;
+import com.unimed.entities.Credenciales;
 import com.unimed.entities.Usuario;
+
+import com.unimed.persistence.OperationFunction.SignUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import java.io.IOException;
-import java.util.List;
 
 public class SignUpController{
 
 
     @FXML
     private TextField FieldNombre;
-    @FXML
-    private TextField FieldEPS;
     @FXML
     private TextField FieldEdad;
     @FXML
@@ -31,11 +27,13 @@ public class SignUpController{
     private TextField FieldPeso;
     @FXML
     private TextField FieldRH;
+    @FXML
+    private TextField FieldEPS;
 
     @FXML
-    private TextField username;
+    private TextField FieldUsername;
     @FXML
-    private PasswordField password;
+    private PasswordField FieldPassword;
 
     @FXML
     private Button signUpButton;
@@ -54,16 +52,35 @@ public class SignUpController{
         appState.goPage();
     }
     @FXML
-    void signIn(ActionEvent event) throws IOException {
-//        Usuario U = auth.signUp(TextEmail.getText(),TextPassword.getText(),TextNombre.getText(),TextApellido.getText());
-        Usuario U = new Usuario("David Millan Perez",20,1.91,60,"O+", "63865b81163842e07000002e");
-        ApplicationState appState = ApplicationState.getInstance();
-        appState.setUsuario(U);
+    void signUp(ActionEvent event)  {
+        // Casting datos
+        try {
+            int edad = Integer.parseInt(FieldEdad.getText());
+            double altura = Double.parseDouble(FieldAltura.getText());
+            double peso = Double.parseDouble(FieldPeso.getText());
+            Usuario usuario = new Usuario(FieldNombre.getText(), edad, altura, peso, FieldRH.getText(),  FieldEPS.getText());
 
-        FXMLLoader loader = appState.setPage("Home");
-        HomeController homeController = loader.getController();
-        homeController.SetUsuario();
-        appState.goPage();
+
+            Credenciales credenciales = new Credenciales(FieldUsername.getText(), FieldPassword.getText());
+
+
+            // Crear usuario
+            SignUp signUp = new SignUp();
+            Pair<Credenciales, Usuario> result = signUp.act(credenciales,usuario);
+            if(result.getValue() == null || result.getKey() == null){
+                throw  new Exception("Error al crear usuario");
+                //TODO mostrar mensaje de error
+            }else{
+                ApplicationState appState = ApplicationState.getInstance();
+                appState.setUsuario(result.getValue());
+                FXMLLoader loader = appState.setPage("Home");
+                HomeController homeController = loader.getController();
+                homeController.SetUsuario();
+                appState.goPage();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

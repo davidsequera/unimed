@@ -48,7 +48,7 @@ public class Caso {
      */
     public void CrearCarpeta() {
         if(this.user_id != null && this.eps_id != null){
-            String path = "src/resources/Casos/"+this.user_id+'/'+ this.nombre;
+            String path = "src/main/resources/casos/"+this.user_id+'/'+ this.nombre;
             boolean comp = new File(path).mkdirs();
             if(comp){
                 this.path = path;
