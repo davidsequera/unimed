@@ -3,12 +3,10 @@ package com.unimed.view;
 import com.unimed.entities.Caso;
 import com.unimed.entities.Usuario;
 
+import com.unimed.persistence.OperationFunction.CrearCaso;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -20,79 +18,97 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CrearCasoController {
-    @FXML
-    private Label L1;
-    @FXML
-    private Label L2;
-    @FXML
-    private Label L3;
-    @FXML
-    private Button B1;
-    @FXML
-    private Button B2;
-    @FXML
-    private Button B3;
-    @FXML
-    private Button B4;
-    @FXML
-    private TextField T1;
-    @FXML
-    private TextArea T2;
 
-    private Stage stage;
-    private Scene scene;
-    private Parent root;
+    @FXML
+    private TextField FieldNombre;
+    @FXML
+    private TextArea FieldDescripcion;
+    @FXML
+    private Button crearCasoButton;
+    @FXML
+    private Button seleccionarArchivosButton;
+    @FXML
+    private Button cargarArchivosButton;
+    @FXML
+    private Label selectedArchivosLabel;
+    @FXML
+    private Label successCaseLabel;
+    @FXML
+    private Label successArchivoLabel;
+    @FXML
+    private Button goHomeButton;
 
-    private Caso N_Caso; //Caso creado que se esta trabajando
+    private Caso casoActual; //Caso creado que se esta trabajando
 
-    private List<File> Agreg; //Lista de archivos a agregar al caso
+    private List<File> casoAchivosList; //Lista de archivos a agregar al caso
 
     /**
      * Metodo para abrir explorador de archivos y adquirir el path
      */
     @FXML
-    private File ImportarArch ()
+    private void crearCaso(ActionEvent e){
+        Usuario usuario = ApplicationState.getInstance().getUsuario();
+        this.casoActual = new Caso(FieldNombre.getText(),FieldDescripcion.getText(), 0, usuario.id, usuario.eps_id);
+        if (this.casoActual.crearCarpeta()) successCaseLabel.setText("El caso se ha creado exitosamente!");
+    }
+    @FXML
+    private void seleccionarArchivos(ActionEvent e){
+        File archivo = importarArchivo();
+        casoAchivosList.add(archivo);
+        selectedArchivosLabel.setText(casoAchivosList.stream().reduce("", (a, b) -> a + b.getName() + "\n", String::concat));
+    }
+    @FXML
+    private void cargarArchivos(ActionEvent e){
+        CrearCaso crearCaso = new CrearCaso();
+        try {
+            guardarArchivos(casoAchivosList);
+            crearCaso.act(this.casoActual);
+            successArchivoLabel.setText("Caso creado y archivos Cargados con exito!");
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+
+    private File importarArchivo ()
     {
         Stage display = new Stage();
-        FileChooser selecArch = new FileChooser();
-        selecArch.setTitle("File Explorer");
-        selecArch.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Files", "*.*"));
-        return  selecArch.showOpenDialog(display);
+        FileChooser selecArchivo = new FileChooser();
+        selecArchivo.setTitle("File Explorer");
+        selecArchivo.getExtensionFilters().add(new FileChooser.ExtensionFilter("All Files", "*.*"));
+        return  selecArchivo.showOpenDialog(display);
     }
-    public void CargarArchs(ActionEvent e){
-       File Arch = ImportarArch();
-       Agreg.add(Arch);
-       String Report = "";
-       for(int i = 0; i < Agreg.size();i++){
-           Report = Report + Agreg.get(i).getName() + "\n";
-       }
-       L1.setText(Report);
+
+
+    /**
+     *
+     * @param archivos, Lista de tipo archivo
+     * Este metodo contiene una rutina para guardar un archivo dado en el directorio del caso
+     */
+    private void guardarArchivos(List<File> archivos) throws IOException {
+        if(archivos.size() == 0){ return;}
+            for (File archivo: archivos) {
+                File copied = new File(this.casoActual.getPath() + "\\" + archivo.getName());
+                com.google.common.io.Files.copy(archivo, copied);
+                this.casoActual.getDocs().add(archivo);
+            }
+            actualizarExistencia();
     }
-    public void SubirArchs(ActionEvent e){
-        Usuario U = ApplicationState.getInstance().getUsuario();
-        L3.setText("Archivos Cargados con exito!");
-        N_Caso.GuardarArchivos(Agreg);
-        U.addCaso(N_Caso);
+    private void actualizarExistencia(){
+        // TODO : Actualizar la existencia de archivos en la base de datos
+        this.casoActual.setN_archivos(this.casoActual.getDocs().size());
     }
-    public void CrearCaso(ActionEvent e){
-        Usuario U = ApplicationState.getInstance().getUsuario();
-        String nombre = T1.getText();
-        String descripcion = T2.getText();
-        this.N_Caso = new Caso(nombre,descripcion, 0, U.id, U.eps_id);
-        this.N_Caso.CrearCarpeta();
-        L2.setText("El caso se ha creado exitosamente!");
-    }
+
     public void goHome(ActionEvent event) throws IOException {
-        Agreg.clear();
+        casoAchivosList.clear();
         ApplicationState appState = ApplicationState.getInstance();
         FXMLLoader loader = appState.setPage("Home");
         HomeController homeController = loader.getController();
-        homeController.SetUsuario();
         appState.goPage();
     }
-    public void SetObjectUsuario(Usuario usuario){
-        // TODO: Implement this method
-        Agreg = new ArrayList(usuario.casos);
+    @FXML
+    private void initialize(){
+        this.casoAchivosList = new ArrayList<>();
     }
 }
 

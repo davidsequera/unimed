@@ -37,18 +37,18 @@
             <Font name="Dubai Light" size="31.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="10.0" layoutY="167.0" prefHeight="343.0" prefWidth="317.0">
+      <AnchorPane layoutY="187.0" prefHeight="333.0" prefWidth="350.0">
          <children>
-            <VBox alignment="TOP_CENTER" layoutX="14.0" layoutY="26.0" prefHeight="314.0" prefWidth="302.0">
+            <VBox alignment="TOP_CENTER" layoutX="25.0" prefHeight="314.0" prefWidth="300.0">
                <children>
-                  <TableView fx:id="PropertyList" fixedCellSize="0.0" prefHeight="239.0" prefWidth="278.0">
+                  <TableView fx:id="PropertyList" fixedCellSize="0.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="256.0" prefWidth="254.0">
                      <columns>
-                        <TableColumn fx:id="ColumnName" maxWidth="100.0" prefWidth="211.99996948242188" text="Nombre" />
-                        <TableColumn fx:id="ColumnLocation" maxWidth="100.0" prefWidth="210.40005493164062" text="Fecha Creacion" />
-                        <TableColumn fx:id="ColumnPrice" maxWidth="100.0" minWidth="0.0" prefWidth="291.199951171875" text="Estado" />
+                        <TableColumn fx:id="ColumnName" maxWidth="150.0" minWidth="0.0" prefWidth="104.79998242855072" text="Nombre" />
+                        <TableColumn fx:id="ColumnDate" maxWidth="160.0" prefWidth="106.39997100830078" text="Fecha Creacion" />
+                        <TableColumn fx:id="ColumnState" maxWidth="120.0" minWidth="0.0" prefWidth="82.40003967285156" text="Estado" />
                      </columns>
                      <VBox.margin>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

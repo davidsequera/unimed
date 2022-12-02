@@ -12,4 +12,12 @@ public class Eps {
         this.id = id;
         this.nombre = nombre;
     }
+
+    @Override
+    public String toString() {
+        return "Eps{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
 }

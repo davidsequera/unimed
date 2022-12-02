@@ -1,18 +1,23 @@
 package com.unimed.view;
 
 import com.unimed.entities.Credenciales;
+import com.unimed.entities.Eps;
 import com.unimed.entities.Usuario;
 
+import com.unimed.persistence.OperationFunction.GetEPS;
 import com.unimed.persistence.OperationFunction.SignUp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignUpController{
 
@@ -28,7 +33,7 @@ public class SignUpController{
     @FXML
     private TextField FieldRH;
     @FXML
-    private TextField FieldEPS;
+    private ChoiceBox choiceBoxEPS;
 
     @FXML
     private TextField FieldUsername;
@@ -51,14 +56,21 @@ public class SignUpController{
         LogInController logInController = loader.getController();
         appState.goPage();
     }
+
+
     @FXML
     void signUp(ActionEvent event)  {
         // Casting datos
         try {
+            ApplicationState a = ApplicationState.getInstance();
             int edad = Integer.parseInt(FieldEdad.getText());
             double altura = Double.parseDouble(FieldAltura.getText());
             double peso = Double.parseDouble(FieldPeso.getText());
-            Usuario usuario = new Usuario(FieldNombre.getText(), edad, altura, peso, FieldRH.getText(),  FieldEPS.getText());
+            String eps_id = a.getEpsList().get(choiceBoxEPS.getValue().toString()).id;
+            if(eps_id == null){
+                throw new Exception("No se ha seleccionado una EPS");
+            }
+            Usuario usuario = new Usuario(FieldNombre.getText(), edad, altura, peso, FieldRH.getText(),  eps_id);
 
 
             Credenciales credenciales = new Credenciales(FieldUsername.getText(), FieldPassword.getText());
@@ -75,7 +87,6 @@ public class SignUpController{
                 appState.setUsuario(result.getValue());
                 FXMLLoader loader = appState.setPage("Home");
                 HomeController homeController = loader.getController();
-                homeController.SetUsuario();
                 appState.goPage();
             }
         }catch (Exception e) {
@@ -83,4 +94,24 @@ public class SignUpController{
         }
     }
 
+    @FXML
+    void  initialize(){
+        try {
+            getEps();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    void getEps() throws Exception {
+        GetEPS getEps = new GetEPS();
+        ArrayList<Eps> listEps = new ArrayList<>(getEps.act());
+        ApplicationState a = ApplicationState.getInstance();
+        a.setEpsList(listEps);
+
+        choiceBoxEPS.getItems().clear();
+        for (Eps eps : listEps) {
+            choiceBoxEPS.getItems().add(eps.nombre);
+        }
+    }
 }

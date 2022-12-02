@@ -87,18 +87,17 @@ public class mySQLConnection implements DatabaseAdapter {
     @Override
     public Caso crearCaso(Caso c) throws Exception {
         try{
-            Caso casodb = null;
-            db.executeUpdate("INSERT INTO caso (nombre,descripcion,fecha_creacion,n_archivos,estado,user_id,eps_id, path) VALUES ('"+c.nombre+"','"+c.descripcion+"','"+c.fecha_creacion+"','"+c.n_archivos+"','"+c.estado+"','"+c.user_id+"','"+c.eps_id+"','"+c.path+"');");
-            ResultSet rs= db.executeQuery("SELECT * FROM caso WHERE user_id = '" + c.user_id+ "' AND eps_id= '" + c.eps_id+ "' AND fecha_creacion= '"+c.fecha_creacion+"' LIMIT 1;");
-            while(rs.next()){
-                casodb =(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
-            }
+            Caso caso_db;
+            db.executeUpdate("INSERT INTO caso (nombre,descripcion,fecha_creacion,n_archivos,estado,user_id,eps_id, path) VALUES ('"+c.getNombre()+"','"+c.getDescripcion()+"','"+c.getFecha_creacion()+"','"+c.getN_archivos()+"','"+c.getEstado()+"','"+c.getUser_id()+"','"+c.getEps_id()+"','"+c.getPath()+"');");
+            ResultSet rs= db.executeQuery("SELECT * FROM caso WHERE user_id = '" + c.getUser_id()+ "' AND eps_id= '" + c.getEps_id()+ "' AND fecha_creacion= '"+c.getFecha_creacion()+"' LIMIT 1;");
+            if(!rs.next()){ throw  new Exception("Error al crear caso");}
+            caso_db =(new Caso(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
             connection.commit();
-            return casodb;
-        }catch (SQLException e){
-            e.printStackTrace();
+            return caso_db;
+        }catch (Exception e){
             connection.rollback();
-            throw new Exception("Error al crear el caso");
+            e.printStackTrace();
+            throw new Exception(e.getMessage());
         }
     }
 
@@ -139,13 +138,19 @@ public class mySQLConnection implements DatabaseAdapter {
     }
     @Override
     public Pair<Credenciales, Usuario> crearUsuario(Credenciales credenciales, Usuario usuario) throws Exception {
-        Usuario usuario_db;
-        db.executeUpdate("INSERT INTO usuario (nombre,edad,altura,peso,RH, eps_id)  VALUES ('"+usuario.nombre+"','"+usuario.edad+"','"+usuario.altura+"','"+usuario.peso+"','"+usuario.RH+"','"+usuario.eps_id+"');");
-        ResultSet rs= db.executeQuery("SELECT id,nombre,edad,altura,peso,RH, eps_id  FROM usuario WHERE nombre='"+usuario.nombre+"' AND edad='"+usuario.edad+"' LIMIT 1;");
-        if(!rs.next()) throw new Exception("Usuario no encontrado");
-        usuario_db = new Usuario(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
-        db.executeUpdate("INSERT INTO credenciales (user_id, username, password) VALUES ('"+usuario_db.id+"','"+credenciales.getUsername()+"','"+credenciales.getPassword()+"');");
-        connection.commit();
-        return new Pair<>(getCredenciales(usuario_db.id), usuario_db);
+        try {
+            Usuario usuario_db;
+            db.executeUpdate("INSERT INTO usuario (nombre,edad,altura,peso,RH, eps_id)  VALUES ('"+usuario.nombre+"','"+usuario.edad+"','"+usuario.altura+"','"+usuario.peso+"','"+usuario.RH+"','"+usuario.eps_id+"');");
+            ResultSet rs= db.executeQuery("SELECT id,nombre,edad,altura,peso,RH, eps_id  FROM usuario WHERE nombre='"+usuario.nombre+"' AND edad='"+usuario.edad+"' LIMIT 1;");
+            if(!rs.next()) throw new Exception("Usuario no encontrado");
+            usuario_db = new Usuario(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7));
+            db.executeUpdate("INSERT INTO credenciales (user_id, username, password) VALUES ('"+usuario_db.id+"','"+credenciales.getUsername()+"','"+credenciales.getPassword()+"');");
+            connection.commit();
+            return new Pair<>(getCredenciales(usuario_db.id), usuario_db);
+        }catch (SQLException e){
+            connection.rollback();
+            e.printStackTrace();
+            throw new Exception("Error al crear el usuario");
+        }
     }
 }

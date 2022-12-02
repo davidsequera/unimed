@@ -44,6 +44,7 @@ dependencies {
     implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
     implementation('mysql:mysql-connector-java:8.0.30')
     implementation('com.opencsv:opencsv:5.7.1')
+    implementation ('com.google.guava:guava:31.1-jre')
     implementation ('org.springframework.security:spring-security-crypto:6.0.0')
 
     testImplementation('com.mikemybytes:junit5-formatted-source:0.1.0')

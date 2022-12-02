@@ -8,11 +8,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LogInController{
 
@@ -26,7 +28,8 @@ public class LogInController{
 
     @FXML
     private Button SignUpButton;
-
+    @FXML
+    private Label logInErrorLabel;
 
 
     @FXML
@@ -46,20 +49,20 @@ public class LogInController{
             LogIn  logIn = new LogIn();
             Pair<Credenciales, Usuario> result = logIn.act(credenciales);
 
-            if(result.getValue() == null || result.getKey() == null){
-                throw new Exception("Error al iniciar sesion usuario");
-                //TODO mostrar mensaje de error
-            }else{
-                ApplicationState appState = ApplicationState.getInstance();
-                appState.setUsuario(result.getValue());
-                FXMLLoader loader = appState.setPage("Home");
-                HomeController homeController = loader.getController();
-                homeController.SetUsuario();
-                appState.goPage();
-            }
+            ApplicationState appState = ApplicationState.getInstance();
+            appState.setUsuario(result.getValue());
+            FXMLLoader loader = appState.setPage("Home");
+            HomeController homeController = loader.getController();
+            appState.goPage();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch (Exception e) {
+            // if message
+            if(e.getMessage().equals("Credenciales no encontradas") || e.getMessage().equals("[Auth] Credenciales no coinciden")){
+                logInErrorLabel.setText("Error credenciales no validas");
+            }else {
+                logInErrorLabel.setText("Error al iniciar sesion");
+                e.printStackTrace();
+            }
         }
 
     }

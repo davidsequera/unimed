@@ -43,6 +43,7 @@
             <PasswordField fx:id="FieldPassword" layoutX="78.0" layoutY="115.0" />
             <Button fx:id="SignUpButton" layoutX="86.0" layoutY="215.0" mnemonicParsing="false" onAction="#goSignUp" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: #5400bf;" text="Registrarse" textFill="WHITE" />
             <Button fx:id="LogInButton" layoutX="86.0" layoutY="166.0" mnemonicParsing="false" onAction="#LogIn" prefHeight="26.0" prefWidth="142.0" style="-fx-background-color: #5400bf;" text="LogIn" textFill="WHITE" />
+            <Label fx:id="logInErrorLabel" layoutX="77.0" layoutY="259.0" prefHeight="18.0" prefWidth="163.0" styleClass="title" textFill="#fa8383" />
          </children>
       </AnchorPane>
    </children>

@@ -16,27 +16,27 @@
    <children>
       <Polygon fill="#090909" layoutX="134.0" layoutY="184.0" opacity="0.06" points="223.0, 352.6666259765625, 223.0, -221.33334350585938, -134.0, 352.6666259765625" stroke="#706f6f" strokeType="INSIDE" />
       <Ellipse fill="#5400bf" layoutX="176.0" layoutY="-21.0" radiusX="181.0" radiusY="99.0" stroke="#4908b5fc" strokeType="INSIDE" />
-      <TextField fx:id="T1" layoutX="46.0" layoutY="137.0" opacity="0.93" prefHeight="25.0" prefWidth="260.0" promptText="Nombre del Caso" style="-fx-background-color: #D9D9D9;" />
-      <TextArea fx:id="T2" layoutX="46.0" layoutY="174.0" prefHeight="112.0" prefWidth="260.0" promptText="Descripcion de Caso" style="-fx-control-inner-background: #D9D9D9;" wrapText="true" />
-      <Label fx:id="L1" alignment="TOP_LEFT" layoutX="151.0" layoutY="345.0" prefHeight="62.0" prefWidth="185.0" style="-fx-background-color: #D9D9D9;" text="Seleccionar Archivos...." textAlignment="CENTER">
-         <effect>
-            <Blend />
-         </effect></Label>
-      <Button fx:id="B1" layoutX="46.0" layoutY="344.0" mnemonicParsing="false" onAction="#CargarArchs" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Seleccionar Archivos" textFill="WHITE" />
-      <Label fx:id="L2" layoutX="132.0" layoutY="296.0" prefHeight="17.0" prefWidth="201.0" />
-      <Button fx:id="B2" layoutX="46.0" layoutY="292.0" mnemonicParsing="false" onAction="#CrearCaso" style="-fx-background-color: #5400bf;" text="Crear Caso" textFill="WHITE" />
-      <Button fx:id="B3" layoutX="46.0" layoutY="412.0" mnemonicParsing="false" onAction="#SubirArchs" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Cargar" textFill="WHITE" />
-      <Button fx:id="B4" layoutX="135.0" layoutY="484.0" mnemonicParsing="false" onAction="#goHome" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Volver" textFill="WHITE" />
-      <Label fx:id="L3" layoutX="151.0" layoutY="416.0" prefHeight="17.0" prefWidth="185.0" />
-      <Label alignment="TOP_CENTER" layoutX="46.0" layoutY="90.0" prefHeight="17.0" prefWidth="260.0" text="Nuevo Caso">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="68.0" fitWidth="67.0" layoutX="154.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../image/Unimed_Logo.png" />
          </image>
       </ImageView>
+      <Label alignment="TOP_CENTER" layoutX="46.0" layoutY="78.0" prefHeight="17.0" prefWidth="260.0" text="Nuevo Caso">
+         <font>
+            <Font name="Dubai Light" size="23.0" />
+         </font>
+      </Label>
+      <TextField fx:id="FieldNombre" layoutX="46.0" layoutY="120.0" opacity="0.93" prefHeight="25.0" prefWidth="260.0" promptText="Nombre del Caso" style="-fx-background-color: #D9D9D9;" />
+      <TextArea fx:id="FieldDescripcion" layoutX="46.0" layoutY="157.0" prefHeight="112.0" prefWidth="260.0" promptText="Descripcion de Caso" style="-fx-control-inner-background: #D9D9D9;" wrapText="true" />
+      <Button fx:id="crearCasoButton" layoutX="46.0" layoutY="279.0" mnemonicParsing="false" onAction="#crearCaso" style="-fx-background-color: #5400bf;" text="Crear" textFill="WHITE" />
+      <Label fx:id="successCaseLabel" layoutX="134.0" layoutY="283.0" prefHeight="17.0" prefWidth="201.0" />
+      <Button fx:id="seleccionarArchivosButton" layoutX="47.0" layoutY="337.0" mnemonicParsing="false" onAction="#seleccionarArchivos" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Seleccionar Archivos" textFill="WHITE" />
+      <Label fx:id="selectedArchivosLabel" alignment="TOP_LEFT" layoutX="151.0" layoutY="319.0" prefHeight="62.0" prefWidth="185.0" style="-fx-background-color: #D9D9D9;" text="Seleccionar Archivos....">
+         <effect>
+            <Blend />
+         </effect></Label>
+      <Button fx:id="cargarArchivosButton" layoutX="132.0" layoutY="421.0" mnemonicParsing="false" onAction="#cargarArchivos" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Cargar Caso" textFill="WHITE" />
+      <Label fx:id="successArchivoLabel" layoutX="86.0" layoutY="394.0" prefHeight="17.0" prefWidth="185.0" />
+      <Button fx:id="goHomeButton" layoutX="132.0" layoutY="481.0" mnemonicParsing="false" onAction="#goHome" prefHeight="25.0" prefWidth="88.0" style="-fx-background-color: #5400bf;" text="Volver" textFill="WHITE" />
    </children>
 </AnchorPane>

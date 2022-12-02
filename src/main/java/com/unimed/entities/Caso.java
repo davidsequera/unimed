@@ -1,5 +1,6 @@
 package com.unimed.entities;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,21 +8,27 @@ import java.util.List;
 
 public class Caso {
 
-    public String id;
-    public String nombre; // Nombre que va a tener el caso
-    public final String descripcion; //Pequeña descripcion de la informacion dentro del caso
-    public final long fecha_creacion; // Fecha en la que se crea el caso
-    public EstadoCaso estado; //El caso esta activo o no
-    public int n_archivos; // Cantidad de archivos presentes en el caso
-    public String user_id;
-    public String eps_id;
-    public String path; // Path hacia donde existe el directorio
-    public List<File> docs = new ArrayList<>(); // Guarda un directorio de nombres para buscar un archivo
+    private String id;
+
+    private static final String PATH = "src/main/resources/casos";
+
+    // Nombre que va a tener el caso
+    private String nombre;
+    private String descripcion; //Pequeña descripcion de la informacion dentro del caso
+    private final long fecha_creacion; // Fecha en la que se crea el caso
+    private final String fecha_creacion_date;
+    private EstadoCaso estado; //El caso esta activo o no
+    private int n_archivos; // Cantidad de archivos presentes en el caso
+    private String user_id;
+    private String eps_id;
+    private String path; // Path hacia donde existe el directorio
+    private List<File> docs = new ArrayList<>(); // Guarda un directorio de nombres para buscar un archivo
 
     public Caso(String nombre, String descripcion, int n_archivos, String user_id, String eps_id) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.fecha_creacion = System.nanoTime();
+        this.fecha_creacion = System.currentTimeMillis();
+        this.fecha_creacion_date = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date(fecha_creacion));
         this.user_id = user_id;
         this.eps_id = eps_id ;
         this.estado = EstadoCaso.INICIADO;
@@ -33,11 +40,11 @@ public class Caso {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha_creacion = Long.parseLong(fecha_creacion);
+        this.fecha_creacion_date = (new SimpleDateFormat("dd/MM/yyyy")).format(new Date(this.fecha_creacion));
         this.n_archivos = Integer.parseInt(n_archivos);
         this.estado = EstadoCaso.valueOf(estado);
         this.eps_id = eps_id;
         this.user_id = user_id;
-        this.nombre = nombre;
         this.path = path;
     }
 
@@ -46,36 +53,95 @@ public class Caso {
      * Este metodo es necesario para crear y activar el directorio dentro del Path seleccionado
      * Si el Directorio ya existe este no se crea
      */
-    public void CrearCarpeta() {
-        if(this.user_id != null && this.eps_id != null){
-            String path = "src/main/resources/casos/"+this.user_id+'/'+ this.nombre;
-            boolean comp = new File(path).mkdirs();
-            if(comp){
-                this.path = path;
-                estado = EstadoCaso.ABIERTO;
-            }
-        }
+    public boolean crearCarpeta() {
+        if(this.user_id == null || this.eps_id == null){ return false;}
+        String path = PATH+'/'+this.user_id+'/'+ this.nombre;
+        boolean dir_created = new File(path).mkdirs();
+        if(!dir_created){return false;}
+        this.path = path;
+        estado = EstadoCaso.ABIERTO;
+        return true;
     }
-    /**
-     *
-     * @param arch , Lista de tipo archivo
-     * Este metodo contiene una rutina para guardar un archivo dado en el directorio del caso
-     */
-    public void GuardarArchivos(List<File>arch){
-        if(arch.size() != 0)
-        {
-            for(int i = 0;i < arch.size();i++)
-            {
-                String name_arch = arch.get(i).getName();
-                arch.get(i).renameTo(new File(this.path + "\\" + name_arch));
-                this.docs.add(arch.get(i));
-            }
-        }
-        ActualizarExistencia();
+
+    public String getId() {
+        return id;
     }
-    private void ActualizarExistencia(){
-        this.n_archivos = docs.size();
+
+    public void setId(String id) {
+        this.id = id;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public long getFecha_creacion() {
+        return fecha_creacion;
+    }
+
+    public String getFecha_creacion_date() { return fecha_creacion_date;}
+
+    public EstadoCaso getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoCaso estado) {
+        this.estado = estado;
+    }
+
+    public int getN_archivos() {
+        return n_archivos;
+    }
+
+    public void setN_archivos(int n_archivos) {
+        this.n_archivos = n_archivos;
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
+    }
+
+    public String getEps_id() {
+        return eps_id;
+    }
+
+    public void setEps_id(String eps_id) {
+        this.eps_id = eps_id;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public List<File> getDocs() {
+        return docs;
+    }
+
+    public void setDocs(List<File> docs) {
+        this.docs = docs;
+    }
+
+
 
     @Override
     public String toString() {
@@ -84,6 +150,7 @@ public class Caso {
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", fecha_creacion=" + fecha_creacion +
+                ", fecha_creacion_date=" + fecha_creacion_date +
                 ", estado=" + estado +
                 ", n_archivos=" + n_archivos +
                 ", user_id='" + user_id + '\'' +

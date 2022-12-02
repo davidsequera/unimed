@@ -8,6 +8,7 @@ module com.unimed {
     requires com.opencsv;
     requires java.sql;
     requires spring.security.crypto;
+    requires com.google.common;
 
     opens com.unimed to javafx.fxml;
     exports com.unimed;

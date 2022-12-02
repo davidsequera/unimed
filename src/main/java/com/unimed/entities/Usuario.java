@@ -13,7 +13,6 @@ public class Usuario {
     public double peso;
     public String RH;
     public String eps_id;
-    public List<Caso> casos;
 
     public Usuario(String nombre, int edad, double altura, double peso, String RH, String eps_id){
         this.nombre = nombre;
@@ -22,7 +21,6 @@ public class Usuario {
         this.peso = peso;
         this.RH = RH;
         this.eps_id = eps_id;
-        this.casos = new ArrayList<>();
     }
     // Database constructor
     public Usuario(String id, String nombre, String edad, String altura,String peso, String RH, String eps_id){
@@ -33,13 +31,6 @@ public class Usuario {
         this.peso = Double.parseDouble(peso);
         this.RH = RH;
         this.eps_id = eps_id;
-        this.casos = new ArrayList<>();
-    }
-    public void setCasos(List<Caso> casos) {
-        this.casos = casos;
-    }
-    public void addCaso(Caso C){
-        casos.add(C);
     }
 
     @Override
@@ -52,7 +43,6 @@ public class Usuario {
                 ", peso=" + peso +
                 ", RH='" + RH + '\'' +
                 ", eps_id='" + eps_id + '\'' +
-                ", casos=" + casos +
                 '}';
     }
 }

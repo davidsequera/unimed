@@ -16,24 +16,5 @@ public class Reporte {
     public void generarReporte() {
         //TODO: Implementar
     }
-    public void writeCSV(String[] header,String [][] data, String filePath){
-        java.io.File file = new java.io.File(filePath);
-        try {
-            FileWriter outputfile = new FileWriter(file);
-            CSVWriter writer = new CSVWriter(outputfile,',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
 
-            // add data to csv
-            writer.writeNext(header);
-            for (String[] row : data) {
-                writer.writeNext(row);
-            }
-
-            // closing writer connection
-            writer.close();
-        }
-        catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 }

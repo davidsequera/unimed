@@ -1,6 +1,7 @@
 package com.unimed.view;
 
 import com.unimed.entities.Credenciales;
+import com.unimed.entities.Eps;
 import com.unimed.entities.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ApplicationState {
 
@@ -15,6 +18,7 @@ public class ApplicationState {
     private static ApplicationState instance;
     private Usuario usuario;
     private Credenciales credenciales;
+    private HashMap<String, Eps> epsList;
 
 
     private Stage stage;
@@ -83,5 +87,18 @@ public class ApplicationState {
 
     public void setRoot(Parent root) {
         this.root = root;
+    }
+
+    public HashMap<String, Eps> getEpsList() {
+        return epsList;
+    }
+
+    public void setEpsList(ArrayList<Eps> epsList) {
+        if(this.epsList == null){
+            this.epsList = new HashMap<>();
+        }
+        for (Eps eps : epsList){
+            this.epsList.put(eps.nombre, eps);
+        }
     }
 }

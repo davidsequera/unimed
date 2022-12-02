@@ -30,22 +30,23 @@
       </ImageView>
       <Label fx:id="nombre" alignment="TOP_LEFT" layoutX="14.0" layoutY="143.0" prefHeight="27.0" prefWidth="179.0" text="Label">
          <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Label fx:id="EPS" alignment="TOP_LEFT" layoutX="14.0" layoutY="180.0" prefHeight="17.0" prefWidth="148.0" text="Label" textFill="#00000080" />
       <Label alignment="CENTER" layoutX="205.0" layoutY="143.0" prefHeight="17.0" prefWidth="133.0" text="Datos Principales">
          <font>
-            <Font name="System Bold Italic" size="12.0" />
+            <Font name="System Bold Italic" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="edad" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="165.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
-      <Label fx:id="altura" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="189.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
-      <Label fx:id="peso" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="211.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
+      <Label fx:id="edad" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="218.0" layoutY="165.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
+      <Label fx:id="altura" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="218.0" layoutY="189.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
+      <Label fx:id="peso" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="218.0" layoutY="211.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
       <Button fx:id="CrearCasoButton" layoutX="77.0" layoutY="301.0" mnemonicParsing="false" onAction="#goCrearCaso" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Crear Nuevo Caso" textFill="WHITE" />
       <Button fx:id="verCasosButton" layoutX="77.0" layoutY="353.0" mnemonicParsing="false" onAction="#goListCasos" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Ver Casos" textFill="WHITE" />
-      <Label fx:id="RH" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="234.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
-      <Button fx:id="generarReporteButton" layoutX="77.0" layoutY="402.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Generar Reporte" textFill="WHITE" />
+      <Label fx:id="RH" alignment="TOP_LEFT" contentDisplay="CENTER" layoutX="218.0" layoutY="234.0" prefHeight="17.0" prefWidth="108.0" text="Label" />
+      <Button fx:id="generarReporteButton" layoutX="77.0" layoutY="402.0" mnemonicParsing="false" onAction="#generarReporte" prefHeight="25.0" prefWidth="195.0" style="-fx-background-color: #5400bf;" text="Generar Reporte" textFill="WHITE" />
       <Button fx:id="LogOutButton" layoutX="266.0" layoutY="464.0" mnemonicParsing="false" onAction="#LogOut" prefHeight="26.0" prefWidth="59.0" style="-fx-background-color: #5400bf;" text="Log Out" textFill="WHITE" />
+      <Label fx:id="reporteLabel" alignment="CENTER" layoutX="101.0" layoutY="437.0" prefHeight="17.0" prefWidth="148.0" textFill="#00000080" />
    </children>
 </AnchorPane>
